@@ -1,14 +1,13 @@
 package com.jingdianjichi.subject.application.controller;
 
 import com.google.common.base.Preconditions;
-import com.jingdianjichi.subject.application.convert.SubjectCategoryBOConverter;
+import com.jingdianjichi.subject.application.convert.SubjectCategoryDTOConverter;
 import com.jingdianjichi.subject.application.dto.SubjectCategoryDTO;
 import com.jingdianjichi.subject.common.entity.Result;
-import com.jingdianjichi.subject.common.enums.CategoryTypeEnum;
-import com.jingdianjichi.subject.common.enums.IsDeletedFlagEnum;
-import com.jingdianjichi.subject.domain.entity.SubjectCategoryBO;
+import com.jingdianjichi.subject.domain.bo.SubjectCategoryBO;
 import com.jingdianjichi.subject.domain.service.SubjectCategoryDomainService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -34,11 +33,11 @@ public class SubjectCategoryController {
     @PostMapping("add")
     public Result<Boolean> add(@RequestBody SubjectCategoryDTO subjectCategoryDTO) {
         try {
-            Preconditions.checkNotNull(subjectCategoryDTO.getCategoryName(), "分类名称不能为空");
+            Preconditions.checkArgument(StringUtils.isNotBlank(subjectCategoryDTO.getCategoryName()), "分类名称不能为空");
             Preconditions.checkNotNull(subjectCategoryDTO.getCategoryType(), "分类类型不能为空");
             Preconditions.checkNotNull(subjectCategoryDTO.getParentId(), "父级id不能为空");
 
-            SubjectCategoryBO subjectCategoryBO = SubjectCategoryBOConverter.INSTANCE.convert(subjectCategoryDTO);
+            SubjectCategoryBO subjectCategoryBO = SubjectCategoryDTOConverter.INSTANCE.convert(subjectCategoryDTO);
 
             subjectCategoryDomainService.add(subjectCategoryBO);
             return Result.ok(true);
@@ -51,10 +50,11 @@ public class SubjectCategoryController {
     public Result<List<SubjectCategoryDTO>> queryPrimaryCategory(@RequestBody SubjectCategoryDTO subjectCategoryDTO) {
         try {
             Preconditions.checkNotNull(subjectCategoryDTO.getCategoryType(), "分类类型不能为空");
-            SubjectCategoryBO subjectCategoryBO = SubjectCategoryBOConverter.INSTANCE.convert(subjectCategoryDTO);
+
+            SubjectCategoryBO subjectCategoryBO = SubjectCategoryDTOConverter.INSTANCE.convert(subjectCategoryDTO);
 
             List<SubjectCategoryBO> subjectCategoryBOList = subjectCategoryDomainService.queryCategory(subjectCategoryBO);
-            List<SubjectCategoryDTO> subjectCategoryDTOList = SubjectCategoryBOConverter.INSTANCE.convert(subjectCategoryBOList);
+            List<SubjectCategoryDTO> subjectCategoryDTOList = SubjectCategoryDTOConverter.INSTANCE.convert(subjectCategoryBOList);
             return Result.ok(subjectCategoryDTOList);
         } catch (Exception e) {
             return Result.fail("查询失败");
@@ -67,10 +67,10 @@ public class SubjectCategoryController {
             Preconditions.checkNotNull(subjectCategoryDTO.getCategoryType(), "分类类型不能为空");
             Preconditions.checkNotNull(subjectCategoryDTO.getParentId(), "父级id不能为空");
 
-            SubjectCategoryBO subjectCategoryBO = SubjectCategoryBOConverter.INSTANCE.convert(subjectCategoryDTO);
+            SubjectCategoryBO subjectCategoryBO = SubjectCategoryDTOConverter.INSTANCE.convert(subjectCategoryDTO);
 
             List<SubjectCategoryBO> subjectCategoryBOList = subjectCategoryDomainService.queryCategory(subjectCategoryBO);
-            List<SubjectCategoryDTO> subjectCategoryDTOList = SubjectCategoryBOConverter.INSTANCE.convert(subjectCategoryBOList);
+            List<SubjectCategoryDTO> subjectCategoryDTOList = SubjectCategoryDTOConverter.INSTANCE.convert(subjectCategoryBOList);
             return Result.ok(subjectCategoryDTOList);
         } catch (Exception e) {
             return Result.fail(e.getMessage());
@@ -81,7 +81,9 @@ public class SubjectCategoryController {
     public Result<Boolean> update(@RequestBody SubjectCategoryDTO subjectCategoryDTO) {
         try {
             Preconditions.checkNotNull(subjectCategoryDTO.getId(), "id不能为空");
-            SubjectCategoryBO subjectCategoryBO = SubjectCategoryBOConverter.INSTANCE.convert(subjectCategoryDTO);
+
+            SubjectCategoryBO subjectCategoryBO = SubjectCategoryDTOConverter.INSTANCE.convert(subjectCategoryDTO);
+
             Boolean result = subjectCategoryDomainService.update(subjectCategoryBO);
             return Result.ok(result);
         } catch (Exception e) {
@@ -94,7 +96,7 @@ public class SubjectCategoryController {
         try {
             Preconditions.checkNotNull(subjectCategoryDTO.getId(), "id不能为空");
 
-            SubjectCategoryBO subjectCategoryBO = SubjectCategoryBOConverter.INSTANCE.convert(subjectCategoryDTO);
+            SubjectCategoryBO subjectCategoryBO = SubjectCategoryDTOConverter.INSTANCE.convert(subjectCategoryDTO);
 
             Boolean result = subjectCategoryDomainService.delete(subjectCategoryBO);
             return Result.ok(result);

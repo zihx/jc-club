@@ -3,10 +3,12 @@ package com.jingdianjichi.subject.infra.basic.service.impl;
 import com.jingdianjichi.subject.infra.basic.entity.SubjectMapping;
 import com.jingdianjichi.subject.infra.basic.mapper.SubjectMappingMapper;
 import com.jingdianjichi.subject.infra.basic.service.SubjectMappingService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * 题目分类关系表(SubjectMapping)表服务实现类
@@ -63,5 +65,10 @@ public class SubjectMappingServiceImpl implements SubjectMappingService {
     @Override
     public boolean deleteById(Long id) {
         return this.subjectMappingMapper.deleteById(id) > 0;
+    }
+
+    @Override
+    public List<SubjectMapping> queryLabelId(SubjectMapping subjectMapping) {
+        return subjectMappingMapper.queryLabelId(subjectMapping);
     }
 }

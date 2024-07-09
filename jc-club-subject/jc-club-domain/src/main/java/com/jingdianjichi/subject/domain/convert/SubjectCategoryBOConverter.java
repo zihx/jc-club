@@ -1,8 +1,7 @@
 package com.jingdianjichi.subject.domain.convert;
 
-import com.jingdianjichi.subject.domain.entity.SubjectCategoryBO;
+import com.jingdianjichi.subject.domain.bo.SubjectCategoryBO;
 import com.jingdianjichi.subject.infra.basic.entity.SubjectCategory;
-import com.jingdianjichi.subject.infra.basic.mapper.SubjectCategoryMapper;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
@@ -18,8 +17,8 @@ import java.util.List;
  * @Version 1.0
  */
 @Mapper
-public interface SubjectCategoryConverter {
-    SubjectCategoryConverter INSTANCE = Mappers.getMapper(SubjectCategoryConverter.class);
+public interface SubjectCategoryBOConverter {
+    SubjectCategoryBOConverter INSTANCE = Mappers.getMapper(SubjectCategoryBOConverter.class);
 
     SubjectCategory convert(SubjectCategoryBO subjectCategoryBO);
 

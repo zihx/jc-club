@@ -1,8 +1,7 @@
-package com.jingdianjichi.subject.infra.basic.entity;
+package com.jingdianjichi.subject.application.dto;
 
 import lombok.Data;
 
-import java.util.Date;
 import java.io.Serializable;
 
 /**
@@ -12,7 +11,7 @@ import java.io.Serializable;
  * @since 2024-07-03 21:47:27
  */
 @Data
-public class SubjectLabel implements Serializable {
+public class SubjectLabelDTO implements Serializable {
     private static final long serialVersionUID = -24269121153202095L;
 /**
      * 主键
@@ -28,25 +27,6 @@ public class SubjectLabel implements Serializable {
     private Integer sortNum;
 
     private Long categoryId;
-/**
-     * 创建人
-     */
-    private String createdBy;
-/**
-     * 创建时间
-     */
-    private Date createdTime;
-/**
-     * 更新人
-     */
-    private String updateBy;
-/**
-     * 更新时间
-     */
-    private Date updateTime;
-
-    private Integer isDeleted;
-
 
 }
 

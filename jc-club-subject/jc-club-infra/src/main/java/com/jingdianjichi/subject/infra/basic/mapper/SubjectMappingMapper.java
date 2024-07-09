@@ -69,5 +69,6 @@ public interface SubjectMappingMapper {
      */
     int deleteById(Long id);
 
+    List<SubjectMapping> queryLabelId(SubjectMapping subjectMapping);
 }
 

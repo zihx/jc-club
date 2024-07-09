@@ -1,6 +1,7 @@
 package com.jingdianjichi.subject.infra.basic.mapper;
 
 import com.jingdianjichi.subject.infra.basic.entity.SubjectLabel;
+import com.sun.org.glassfish.gmbal.ParameterNames;
 import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
@@ -69,5 +70,6 @@ public interface SubjectLabelMapper {
      */
     int deleteById(Long id);
 
+    List<SubjectLabel> batchQueryByIds(@Param("idList") List<Long> idList);
 }
 

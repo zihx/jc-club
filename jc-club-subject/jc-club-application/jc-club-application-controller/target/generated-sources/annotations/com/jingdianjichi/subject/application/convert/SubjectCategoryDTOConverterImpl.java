@@ -1,17 +1,17 @@
 package com.jingdianjichi.subject.application.convert;
 
 import com.jingdianjichi.subject.application.dto.SubjectCategoryDTO;
-import com.jingdianjichi.subject.domain.entity.SubjectCategoryBO;
+import com.jingdianjichi.subject.domain.bo.SubjectCategoryBO;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-07-04T20:30:46+0800",
+    date = "2024-07-09T17:23:58+0800",
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 1.8.0_371 (Oracle Corporation)"
 )
-public class SubjectCategoryBOConverterImpl implements SubjectCategoryBOConverter {
+public class SubjectCategoryDTOConverterImpl implements SubjectCategoryDTOConverter {
 
     @Override
     public SubjectCategoryBO convert(SubjectCategoryDTO subjectCategoryDTO) {
@@ -26,7 +26,6 @@ public class SubjectCategoryBOConverterImpl implements SubjectCategoryBOConverte
         subjectCategoryBO.setCategoryType( subjectCategoryDTO.getCategoryType() );
         subjectCategoryBO.setImageUrl( subjectCategoryDTO.getImageUrl() );
         subjectCategoryBO.setParentId( subjectCategoryDTO.getParentId() );
-        subjectCategoryBO.setIsDeleted( subjectCategoryDTO.getIsDeleted() );
 
         return subjectCategoryBO;
     }
@@ -57,7 +56,6 @@ public class SubjectCategoryBOConverterImpl implements SubjectCategoryBOConverte
         subjectCategoryDTO.setCategoryType( subjectCategoryBO.getCategoryType() );
         subjectCategoryDTO.setImageUrl( subjectCategoryBO.getImageUrl() );
         subjectCategoryDTO.setParentId( subjectCategoryBO.getParentId() );
-        subjectCategoryDTO.setIsDeleted( subjectCategoryBO.getIsDeleted() );
 
         return subjectCategoryDTO;
     }

@@ -2,6 +2,8 @@ package com.jingdianjichi.subject.infra.basic.service;
 
 import com.jingdianjichi.subject.infra.basic.entity.SubjectMapping;
 
+import java.util.List;
+
 
 /**
  * 题目分类关系表(SubjectMapping)表服务接口
@@ -43,4 +45,5 @@ public interface SubjectMappingService {
      */
     boolean deleteById(Long id);
 
+    List<SubjectMapping> queryLabelId(SubjectMapping subjectMapping);
 }

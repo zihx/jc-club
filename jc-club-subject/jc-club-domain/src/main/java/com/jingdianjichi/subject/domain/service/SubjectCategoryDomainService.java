@@ -1,7 +1,6 @@
 package com.jingdianjichi.subject.domain.service;
 
-import com.jingdianjichi.subject.domain.entity.SubjectCategoryBO;
-import org.springframework.stereotype.Service;
+import com.jingdianjichi.subject.domain.bo.SubjectCategoryBO;
 
 import java.util.List;
 

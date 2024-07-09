@@ -1,9 +1,8 @@
-package com.jingdianjichi.subject.domain.entity;
+package com.jingdianjichi.subject.domain.bo;
 
 import lombok.Data;
 
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * 题目分类(SubjectCategory)实体类
@@ -34,9 +33,5 @@ public class SubjectCategoryBO implements Serializable {
      * 父级id
      */
     private Long parentId;
-    /**
-     * 是否删除 0: 未删除 1: 已删除
-     */
-    private Integer isDeleted;
 }
 

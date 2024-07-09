@@ -1,6 +1,6 @@
 package com.jingdianjichi.subject.domain.convert;
 
-import com.jingdianjichi.subject.domain.entity.SubjectCategoryBO;
+import com.jingdianjichi.subject.domain.bo.SubjectCategoryBO;
 import com.jingdianjichi.subject.infra.basic.entity.SubjectCategory;
 import java.util.ArrayList;
 import java.util.List;
@@ -8,10 +8,10 @@ import javax.annotation.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-07-04T20:30:45+0800",
+    date = "2024-07-09T17:23:56+0800",
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 1.8.0_371 (Oracle Corporation)"
 )
-public class SubjectCategoryConverterImpl implements SubjectCategoryConverter {
+public class SubjectCategoryBOConverterImpl implements SubjectCategoryBOConverter {
 
     @Override
     public SubjectCategory convert(SubjectCategoryBO subjectCategoryBO) {
@@ -26,7 +26,6 @@ public class SubjectCategoryConverterImpl implements SubjectCategoryConverter {
         subjectCategory.setCategoryType( subjectCategoryBO.getCategoryType() );
         subjectCategory.setImageUrl( subjectCategoryBO.getImageUrl() );
         subjectCategory.setParentId( subjectCategoryBO.getParentId() );
-        subjectCategory.setIsDeleted( subjectCategoryBO.getIsDeleted() );
 
         return subjectCategory;
     }
@@ -57,7 +56,6 @@ public class SubjectCategoryConverterImpl implements SubjectCategoryConverter {
         subjectCategoryBO.setCategoryType( subjectCategory.getCategoryType() );
         subjectCategoryBO.setImageUrl( subjectCategory.getImageUrl() );
         subjectCategoryBO.setParentId( subjectCategory.getParentId() );
-        subjectCategoryBO.setIsDeleted( subjectCategory.getIsDeleted() );
 
         return subjectCategoryBO;
     }

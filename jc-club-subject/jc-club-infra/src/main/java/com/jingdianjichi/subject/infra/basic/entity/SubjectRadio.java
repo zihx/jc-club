@@ -1,5 +1,7 @@
 package com.jingdianjichi.subject.infra.basic.entity;
 
+import lombok.Data;
+
 import java.util.Date;
 import java.io.Serializable;
 
@@ -9,6 +11,7 @@ import java.io.Serializable;
  * @author makejava
  * @since 2024-07-03 21:47:27
  */
+@Data
 public class SubjectRadio implements Serializable {
     private static final long serialVersionUID = 957411590368805151L;
 /**
@@ -49,87 +52,6 @@ public class SubjectRadio implements Serializable {
     private Date updateTime;
 
     private Integer isDeleted;
-
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getSubjectId() {
-        return subjectId;
-    }
-
-    public void setSubjectId(Long subjectId) {
-        this.subjectId = subjectId;
-    }
-
-    public Integer getOptionType() {
-        return optionType;
-    }
-
-    public void setOptionType(Integer optionType) {
-        this.optionType = optionType;
-    }
-
-    public String getOptionContent() {
-        return optionContent;
-    }
-
-    public void setOptionContent(String optionContent) {
-        this.optionContent = optionContent;
-    }
-
-    public Integer getIsCorrect() {
-        return isCorrect;
-    }
-
-    public void setIsCorrect(Integer isCorrect) {
-        this.isCorrect = isCorrect;
-    }
-
-    public String getCreatedBy() {
-        return createdBy;
-    }
-
-    public void setCreatedBy(String createdBy) {
-        this.createdBy = createdBy;
-    }
-
-    public Date getCreatedTime() {
-        return createdTime;
-    }
-
-    public void setCreatedTime(Date createdTime) {
-        this.createdTime = createdTime;
-    }
-
-    public String getUpdateBy() {
-        return updateBy;
-    }
-
-    public void setUpdateBy(String updateBy) {
-        this.updateBy = updateBy;
-    }
-
-    public Date getUpdateTime() {
-        return updateTime;
-    }
-
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
-    }
-
-    public Integer getIsDeleted() {
-        return isDeleted;
-    }
-
-    public void setIsDeleted(Integer isDeleted) {
-        this.isDeleted = isDeleted;
-    }
 
 }
 
