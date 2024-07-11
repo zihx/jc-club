@@ -29,7 +29,7 @@ import java.util.stream.Collectors;
  * @Create 2024/7/4 21:48
  * @Version 1.0
  */
-@Service
+@Service("subjectLabelDomainService")
 @Slf4j
 public class SubjectLabelDomainServiceImpl implements SubjectLabelDomainService {
 

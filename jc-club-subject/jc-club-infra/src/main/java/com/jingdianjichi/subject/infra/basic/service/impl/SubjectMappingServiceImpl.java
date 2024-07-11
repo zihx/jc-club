@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 
 import javax.annotation.Resource;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -70,5 +71,10 @@ public class SubjectMappingServiceImpl implements SubjectMappingService {
     @Override
     public List<SubjectMapping> queryLabelId(SubjectMapping subjectMapping) {
         return subjectMappingMapper.queryLabelId(subjectMapping);
+    }
+
+    @Override
+    public void insertBatch(List<SubjectMapping> subjectMappingList) {
+        subjectMappingMapper.insertBatch(subjectMappingList);
     }
 }

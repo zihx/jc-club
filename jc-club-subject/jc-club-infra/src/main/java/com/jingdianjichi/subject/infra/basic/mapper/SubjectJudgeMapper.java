@@ -69,5 +69,6 @@ public interface SubjectJudgeMapper {
      */
     int deleteById(Long id);
 
+    List<SubjectJudge> queryByCondition(SubjectJudge subjectJudge);
 }
 

@@ -69,5 +69,6 @@ public interface SubjectMultipleMapper {
      */
     int deleteById(Long id);
 
+    List<SubjectMultiple> queryByCondition(SubjectMultiple subjectMultiple);
 }
 

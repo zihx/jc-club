@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * 判断题(SubjectJudge)表服务实现类
@@ -63,5 +64,15 @@ public class SubjectJudgeServiceImpl implements SubjectJudgeService {
     @Override
     public boolean deleteById(Long id) {
         return this.subjectJudgeMapper.deleteById(id) > 0;
+    }
+
+    @Override
+    public void insertBatch(List<SubjectJudge> subjectJudgeList) {
+        subjectJudgeMapper.insertBatch(subjectJudgeList);
+    }
+
+    @Override
+    public List<SubjectJudge> queryByCondition(SubjectJudge subjectJudge) {
+        return subjectJudgeMapper.queryByCondition(subjectJudge);
     }
 }

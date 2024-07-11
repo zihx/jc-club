@@ -2,6 +2,8 @@ package com.jingdianjichi.subject.infra.basic.service;
 
 import com.jingdianjichi.subject.infra.basic.entity.SubjectRadio;
 
+import java.util.List;
+
 
 /**
  * 单选题信息表(SubjectRadio)表服务接口
@@ -43,4 +45,7 @@ public interface SubjectRadioService {
      */
     boolean deleteById(Long id);
 
+    void insertBatch(List<SubjectRadio> subjectRadioList);
+
+    List<SubjectRadio> queryByCondition(SubjectRadio subjectRadio);
 }

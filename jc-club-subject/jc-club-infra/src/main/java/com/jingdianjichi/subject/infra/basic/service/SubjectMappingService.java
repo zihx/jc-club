@@ -46,4 +46,6 @@ public interface SubjectMappingService {
     boolean deleteById(Long id);
 
     List<SubjectMapping> queryLabelId(SubjectMapping subjectMapping);
+
+    void insertBatch(List<SubjectMapping> subjectMappingList);
 }

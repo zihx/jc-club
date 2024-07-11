@@ -21,42 +21,6 @@
         where id = #{id}
     </select>
  
-    <!--查询指定行数据-->
-    <select id="queryAllByLimit" resultMap="SubjectLikedMap">
-        select id, subject_id, like_user_id, status, created_by, created_time, update_by, update_time, is_deleted
-        from subject_liked
-        <where>
-            <if test="id != null">
-                and id = #{id}
-            </if>
-            <if test="subjectId != null">
-                and subject_id = #{subjectId}
-            </if>
-            <if test="likeUserId != null and likeUserId != ''">
-                and like_user_id = #{likeUserId}
-            </if>
-            <if test="status != null">
-                and status = #{status}
-            </if>
-            <if test="createdBy != null and createdBy != ''">
-                and created_by = #{createdBy}
-            </if>
-            <if test="createdTime != null">
-                and created_time = #{createdTime}
-            </if>
-            <if test="updateBy != null and updateBy != ''">
-                and update_by = #{updateBy}
-            </if>
-            <if test="updateTime != null">
-                and update_time = #{updateTime}
-            </if>
-            <if test="isDeleted != null">
-                and is_deleted = #{isDeleted}
-            </if>
-        </where>
-        limit #{pageable.offset}, #{pageable.pageSize}
-    </select>
- 
     <!--统计总行数-->
     <select id="count" resultType="java.lang.Long">
         select count(1)

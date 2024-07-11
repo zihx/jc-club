@@ -64,4 +64,9 @@ public class SubjectBriefServiceImpl implements SubjectBriefService {
     public boolean deleteById(Long id) {
         return this.subjectBriefMapper.deleteById(id) > 0;
     }
+
+    @Override
+    public SubjectBrief queryByCondition(SubjectBrief subjectBrief) {
+        return subjectBriefMapper.queryByCondition(subjectBrief);
+    }
 }

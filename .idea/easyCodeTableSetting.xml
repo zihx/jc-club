@@ -852,7 +852,7 @@
               <option name="saveModelName" value="jc-club-infra" />
               <option name="savePackageName" value="com.jingdianjichi.subject.infra.basic" />
               <option name="savePath" value="./jc-club-subject/jc-club-infra/src/main/java/com/jingdianjichi/subject/infra/basic" />
-              <option name="templateGroupName" value="" />
+              <option name="templateGroupName" value="Default" />
             </TableInfoDTO>
           </value>
         </entry>
@@ -938,7 +938,7 @@
               <option name="saveModelName" value="jc-club-infra" />
               <option name="savePackageName" value="com.jingdianjichi.subject.infra.basic" />
               <option name="savePath" value="./jc-club-subject/jc-club-infra/src/main/java/com/jingdianjichi/subject/infra/basic" />
-              <option name="templateGroupName" value="" />
+              <option name="templateGroupName" value="Default" />
             </TableInfoDTO>
           </value>
         </entry>

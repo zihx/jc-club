@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 
 import javax.annotation.Resource;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * 题目信息表(SubjectInfo)表服务实现类
@@ -37,9 +39,8 @@ public class SubjectInfoServiceImpl implements SubjectInfoService {
      * @return 实例对象
      */
     @Override
-    public SubjectInfo insert(SubjectInfo subjectInfo) {
-        this.subjectInfoMapper.insert(subjectInfo);
-        return subjectInfo;
+    public int insert(SubjectInfo subjectInfo) {
+        return this.subjectInfoMapper.insert(subjectInfo);
     }
 
     /**
@@ -63,5 +64,15 @@ public class SubjectInfoServiceImpl implements SubjectInfoService {
     @Override
     public boolean deleteById(Long id) {
         return this.subjectInfoMapper.deleteById(id) > 0;
+    }
+
+    @Override
+    public int countByCondition(SubjectInfo subjectInfo, Long categoryId, Long labelId) {
+        return subjectInfoMapper.countByCondition(subjectInfo, categoryId, labelId);
+    }
+
+    @Override
+    public List<SubjectInfo> queryPage(SubjectInfo subjectInfo, Long categoryId, Long labelId, int offset, int pageSize) {
+        return subjectInfoMapper.queryPage(subjectInfo, categoryId, labelId, offset, pageSize);
     }
 }

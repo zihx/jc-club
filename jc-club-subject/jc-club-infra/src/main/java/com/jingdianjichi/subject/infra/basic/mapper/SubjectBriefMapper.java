@@ -69,5 +69,6 @@ public interface SubjectBriefMapper {
      */
     int deleteById(Long id);
 
+    SubjectBrief queryByCondition(SubjectBrief subjectBrief);
 }
 

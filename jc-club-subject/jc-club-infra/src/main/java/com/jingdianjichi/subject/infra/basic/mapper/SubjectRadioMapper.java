@@ -69,5 +69,6 @@ public interface SubjectRadioMapper {
      */
     int deleteById(Long id);
 
+    List<SubjectRadio> queryByCondition(SubjectRadio subjectRadio);
 }
 

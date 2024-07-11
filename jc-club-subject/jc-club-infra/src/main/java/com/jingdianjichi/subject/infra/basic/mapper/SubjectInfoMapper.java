@@ -69,5 +69,14 @@ public interface SubjectInfoMapper {
      */
     int deleteById(Long id);
 
+    int countByCondition(@Param("subjectInfo") SubjectInfo subjectInfo,
+                         @Param("categoryId") Long categoryId,
+                         @Param("labelId") Long labelId);
+
+    List<SubjectInfo> queryPage(@Param("subjectInfo") SubjectInfo subjectInfo,
+                                @Param("categoryId") Long categoryId,
+                                @Param("labelId") Long labelId,
+                                @Param("offset") int offset,
+                                @Param("pageSize") int pageSize);
 }
 

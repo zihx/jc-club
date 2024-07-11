@@ -21,7 +21,7 @@ import java.util.List;
  * @Create 2024/7/4 11:35
  * @Version 1.0
  */
-@Service
+@Service("subjectCategoryDomainService")
 @Slf4j
 public class SubjectCategoryDomainServiceImpl implements SubjectCategoryDomainService {
 
