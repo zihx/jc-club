@@ -101,18 +101,20 @@ public class SubjectDomainServiceImpl implements SubjectDomainService {
     @Override
     public SubjectInfoBO querySubjectInfo(SubjectInfoBO subjectInfoBO) {
         SubjectInfo subjectInfo = subjectInfoService.queryById(subjectInfoBO.getId());
-
+        // 根据题目类型获取相应的处理类
         SubjectTypeHandler subjectTypeHandler = subjectTypeHandlerFactory.getHandler(subjectInfo.getSubjectType());
         SubjectOptionBO subjectOptionBO = subjectTypeHandler.query(subjectInfo.getId());
-
         subjectInfoBO = SubjectInfoBOConverter.INSTANCE.convert(subjectInfo, subjectOptionBO);
 
         SubjectMapping subjectMapping = new SubjectMapping();
         subjectMapping.setSubjectId(subjectInfo.getId());
+        subjectMapping.setIsDeleted(IsDeletedFlagEnum.UN_DELETED.getCode());
         List<SubjectMapping> subjectMappingList = subjectMappingService.queryLabelId(subjectMapping);
+        // 获取题目包含的labelId
         List<Long> labelIds = subjectMappingList.stream().map(SubjectMapping::getLabelId).collect(Collectors.toList());
-        log.info("labelIds {}", labelIds);
+        // 根据labelId查询label信息
         List<SubjectLabel> subjectLabelList = subjectLabelService.batchQueryByIds(labelIds);
+        // 获取label名称
         List<String> labelNameList = subjectLabelList.stream().map(SubjectLabel::getLabelName).collect(Collectors.toList());
         subjectInfoBO.setLabelName(labelNameList);
         return subjectInfoBO;

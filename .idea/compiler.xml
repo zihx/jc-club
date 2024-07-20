@@ -14,7 +14,6 @@
         <module name="jc-club-common" />
         <module name="jc-club-application-controller" />
         <module name="jc-club-domain" />
-        <module name="jc-club-application" />
         <module name="jc-club-application-mq" />
       </profile>
     </annotationProcessing>
