@@ -24,17 +24,16 @@ public class SubjectTypeHandlerFactory {
     @Resource
     private List<SubjectTypeHandler> subjectTypeHandlerList;
 
-    private final Map<SubjectTypeEnum, SubjectTypeHandler> handlerMap = new HashMap<>();
+    private final Map<Integer, SubjectTypeHandler> handlerMap = new HashMap<>();
 
     public SubjectTypeHandler getHandler(int subjectType) {
-        SubjectTypeEnum subjectTypeEnum = SubjectTypeEnum.getByCode(subjectType);
-        return handlerMap.get(subjectTypeEnum);
+        return handlerMap.get(subjectType);
     }
 
     @PostConstruct
     public void init() {
         for (SubjectTypeHandler subjectTypeHandler : subjectTypeHandlerList) {
-            handlerMap.put(subjectTypeHandler.getHandlerType(), subjectTypeHandler);
+            handlerMap.put(subjectTypeHandler.getHandlerType().getCode(), subjectTypeHandler);
         }
     }
 }

@@ -1,0 +1,11 @@
+server:
+  port: 4000
+
+minio:
+  url: http://192.168.88.130:9000
+  accessKey: zihuanxue
+  secretKey: qs3cbrconlyone
+
+#storage:
+#  service:
+#    type: minio

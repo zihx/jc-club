@@ -25,13 +25,4 @@ public enum SubjectTypeEnum {
         this.code = code;
         this.desc = desc;
     }
-
-    public static SubjectTypeEnum getByCode(Integer code) {
-        for (SubjectTypeEnum typeEnum : SubjectTypeEnum.values()) {
-            if (typeEnum.getCode().equals(code)) {
-                return typeEnum;
-            }
-        }
-        return null;
-    }
 }

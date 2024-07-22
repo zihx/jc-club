@@ -1,17 +1,56 @@
-21:19:34.602  [main] INFO  com.jingdianjichi.subject.SubjectApplication - Starting SubjectApplication using Java 1.8.0_371 on LAPTOP-HOOMCD7G with PID 24408 (F:\JavaProject\project\jc-club\jc-club-subject\jc-club-starter\target\jc-club-starter.jar started by lenovo in F:\JavaProject\project\jc-club\jc-club-subject\jc-club-starter\target)
-21:19:34.613  [main] INFO  com.jingdianjichi.subject.SubjectApplication - No active profile set, falling back to default profiles: default
-21:19:37.745  [main] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 3000 (http)
-21:19:41.019  [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-3000"]
-21:19:41.021  [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
-21:19:41.021  [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.41]
-21:19:41.022  [main] INFO  org.apache.catalina.core.AprLifecycleListener - Loaded Apache Tomcat Native library [2.0.6] using APR version [1.7.4].
-21:19:41.023  [main] INFO  org.apache.catalina.core.AprLifecycleListener - APR capabilities: IPv6 [true], sendfile [true], accept filters [false], random [true].
-21:19:41.024  [main] INFO  org.apache.catalina.core.AprLifecycleListener - APR/OpenSSL configuration: useAprConnector [false], useOpenSSL [true]
-21:19:41.046  [main] INFO  org.apache.catalina.core.AprLifecycleListener - OpenSSL successfully initialized [OpenSSL 3.0.11 19 Sep 2023]
-21:19:41.221  [main] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
-21:19:41.221  [main] INFO  org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 6500 ms
-21:19:41.403  [main] INFO  com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceAutoConfigure - Init DruidDataSource
-21:19:42.104  [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
-21:19:44.093  [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-3000"]
-21:19:44.142  [main] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 3000 (http) with context path ''
-21:19:44.158  [main] INFO  com.jingdianjichi.subject.SubjectApplication - Started SubjectApplication in 20.01 seconds (JVM running for 21.575)
+23:12:42.591  [main] INFO  com.jingdianjichi.subject.SubjectApplication - Starting SubjectApplication using Java 1.8.0_371 on LAPTOP-HOOMCD7G with PID 10312 (F:\JavaProject\project\jc-club\jc-club-subject\jc-club-starter\target\jc-club-starter.jar started by lenovo in F:\JavaProject\project\jc-club\jc-club-subject\jc-club-starter\target)
+23:12:42.627  [main] INFO  com.jingdianjichi.subject.SubjectApplication - No active profile set, falling back to default profiles: default
+23:12:44.984  [main] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 3000 (http)
+23:12:44.994  [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-3000"]
+23:12:44.996  [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+23:12:44.996  [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.41]
+23:12:44.997  [main] INFO  org.apache.catalina.core.AprLifecycleListener - Loaded Apache Tomcat Native library [2.0.6] using APR version [1.7.4].
+23:12:44.998  [main] INFO  org.apache.catalina.core.AprLifecycleListener - APR capabilities: IPv6 [true], sendfile [true], accept filters [false], random [true].
+23:12:44.998  [main] INFO  org.apache.catalina.core.AprLifecycleListener - APR/OpenSSL configuration: useAprConnector [false], useOpenSSL [true]
+23:12:45.002  [main] INFO  org.apache.catalina.core.AprLifecycleListener - OpenSSL successfully initialized [OpenSSL 3.0.11 19 Sep 2023]
+23:12:45.135  [main] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+23:12:45.135  [main] INFO  org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 2424 ms
+23:12:45.271  [main] INFO  com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceAutoConfigure - Init DruidDataSource
+23:12:45.876  [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+23:12:47.377  [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-3000"]
+23:12:47.384  [main] WARN  org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'; nested exception is org.springframework.boot.web.server.PortInUseException: Port 3000 is already in use
+23:12:47.388  [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closing ...
+23:12:47.397  [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed
+23:12:47.401  [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Pausing ProtocolHandler ["http-nio-3000"]
+23:12:47.401  [main] INFO  org.apache.catalina.core.StandardService - Stopping service [Tomcat]
+23:12:47.404  [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Stopping ProtocolHandler ["http-nio-3000"]
+23:12:47.405  [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Destroying ProtocolHandler ["http-nio-3000"]
+23:12:47.411  [main] INFO  org.springframework.boot.autoconfigure.logging.ConditionEvaluationReportLoggingListener - 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+23:12:47.438  [main] ERROR org.springframework.boot.diagnostics.LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 3000 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 3000 or configure this application to listen on another port.
+
+23:13:00.104  [main] INFO  com.jingdianjichi.subject.SubjectApplication - Starting SubjectApplication using Java 1.8.0_371 on LAPTOP-HOOMCD7G with PID 31000 (F:\JavaProject\project\jc-club\jc-club-subject\jc-club-starter\target\jc-club-starter.jar started by lenovo in F:\JavaProject\project\jc-club\jc-club-subject\jc-club-starter\target)
+23:13:00.113  [main] INFO  com.jingdianjichi.subject.SubjectApplication - No active profile set, falling back to default profiles: default
+23:13:02.468  [main] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 3000 (http)
+23:13:02.479  [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-3000"]
+23:13:02.480  [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+23:13:02.480  [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.41]
+23:13:02.482  [main] INFO  org.apache.catalina.core.AprLifecycleListener - Loaded Apache Tomcat Native library [2.0.6] using APR version [1.7.4].
+23:13:02.482  [main] INFO  org.apache.catalina.core.AprLifecycleListener - APR capabilities: IPv6 [true], sendfile [true], accept filters [false], random [true].
+23:13:02.482  [main] INFO  org.apache.catalina.core.AprLifecycleListener - APR/OpenSSL configuration: useAprConnector [false], useOpenSSL [true]
+23:13:02.487  [main] INFO  org.apache.catalina.core.AprLifecycleListener - OpenSSL successfully initialized [OpenSSL 3.0.11 19 Sep 2023]
+23:13:02.604  [main] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+23:13:02.605  [main] INFO  org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 2389 ms
+23:13:02.738  [main] INFO  com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceAutoConfigure - Init DruidDataSource
+23:13:03.329  [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+23:13:04.787  [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-3000"]
+23:13:04.824  [main] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 3000 (http) with context path ''
+23:13:04.842  [main] INFO  com.jingdianjichi.subject.SubjectApplication - Started SubjectApplication in 5.386 seconds (JVM running for 6.553)

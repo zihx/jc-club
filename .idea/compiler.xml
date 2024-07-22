@@ -14,12 +14,10 @@
         <module name="jc-club-common" />
         <module name="jc-club-application-controller" />
         <module name="jc-club-domain" />
+        <module name="jc-club-oss" />
         <module name="jc-club-application-mq" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel target="8">
-      <module name="jc-club-subject-application" target="17" />
-      <module name="jc-club-subject-domain" target="17" />
-    </bytecodeTargetLevel>
+    <bytecodeTargetLevel target="8" />
   </component>
 </project>
