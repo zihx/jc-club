@@ -23,14 +23,14 @@ import java.util.List;
  * @Version 1.0
  */
 @RestController
-@RequestMapping("subject/category")
+@RequestMapping("/subject/category")
 @Slf4j
 public class SubjectCategoryController {
 
     @Resource
     private SubjectCategoryDomainService subjectCategoryDomainService;
 
-    @PostMapping("add")
+    @PostMapping("/add")
     public Result<Boolean> add(@RequestBody SubjectCategoryDTO subjectCategoryDTO) {
         try {
             Preconditions.checkArgument(StringUtils.isNotBlank(subjectCategoryDTO.getCategoryName()), "分类名称不能为空");
@@ -46,7 +46,7 @@ public class SubjectCategoryController {
         }
     }
 
-    @PostMapping("queryPrimaryCategory")
+    @PostMapping("/queryPrimaryCategory")
     public Result<List<SubjectCategoryDTO>> queryPrimaryCategory(@RequestBody SubjectCategoryDTO subjectCategoryDTO) {
         try {
             Preconditions.checkNotNull(subjectCategoryDTO.getCategoryType(), "分类类型不能为空");
@@ -61,7 +61,7 @@ public class SubjectCategoryController {
         }
     }
 
-    @PostMapping("queryCategoryByPrimary")
+    @PostMapping("/queryCategoryByPrimary")
     public Result<List<SubjectCategoryDTO>> queryCategoryByPrimary(@RequestBody SubjectCategoryDTO subjectCategoryDTO) {
         try {
             Preconditions.checkNotNull(subjectCategoryDTO.getCategoryType(), "分类类型不能为空");
@@ -77,7 +77,7 @@ public class SubjectCategoryController {
         }
     }
 
-    @PostMapping("update")
+    @PostMapping("/update")
     public Result<Boolean> update(@RequestBody SubjectCategoryDTO subjectCategoryDTO) {
         try {
             Preconditions.checkNotNull(subjectCategoryDTO.getId(), "id不能为空");
@@ -91,7 +91,7 @@ public class SubjectCategoryController {
         }
     }
 
-    @PostMapping("delete")
+    @PostMapping("/delete")
     public Result<Boolean> delete(@RequestBody SubjectCategoryDTO subjectCategoryDTO) {
         try {
             Preconditions.checkNotNull(subjectCategoryDTO.getId(), "id不能为空");

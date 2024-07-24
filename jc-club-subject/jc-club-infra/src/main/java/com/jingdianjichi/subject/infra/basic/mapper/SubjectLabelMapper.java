@@ -70,5 +70,7 @@ public interface SubjectLabelMapper {
     int deleteById(Long id);
 
     List<SubjectLabel> batchQueryByIds(@Param("idList") List<Long> idList);
+
+    List<SubjectLabel> queryByCondition(SubjectLabel subjectLabel);
 }
 

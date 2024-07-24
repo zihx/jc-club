@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: jc-club-auth
+  profiles:
+    active: dev
+  cloud:
+    nacos:
+      config:
+        server-addr: 192.168.88.130:8848
+#        prefix: ${spring.application.name}
+#        group: DEFAULT_GROUP
+#        namespace:
+        file-extension: yaml
+      # 服务注册与发现
+      discovery:
+        enabled: true
+        server-addr: 192.168.88.130:8848
+

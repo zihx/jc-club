@@ -20,6 +20,7 @@ import java.util.List;
  * @Version 1.0
  */
 @RestController
+@RequestMapping("/oss")
 public class FileController {
 
     @Resource

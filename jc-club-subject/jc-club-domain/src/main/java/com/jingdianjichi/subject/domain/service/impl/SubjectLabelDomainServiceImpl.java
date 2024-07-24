@@ -1,12 +1,15 @@
 package com.jingdianjichi.subject.domain.service.impl;
 
+import com.jingdianjichi.subject.common.enums.CategoryTypeEnum;
 import com.jingdianjichi.subject.common.enums.IsDeletedFlagEnum;
 import com.jingdianjichi.subject.domain.bo.SubjectCategoryBO;
 import com.jingdianjichi.subject.domain.bo.SubjectLabelBO;
 import com.jingdianjichi.subject.domain.convert.SubjectLabelBOConverter;
 import com.jingdianjichi.subject.domain.service.SubjectLabelDomainService;
+import com.jingdianjichi.subject.infra.basic.entity.SubjectCategory;
 import com.jingdianjichi.subject.infra.basic.entity.SubjectLabel;
 import com.jingdianjichi.subject.infra.basic.entity.SubjectMapping;
+import com.jingdianjichi.subject.infra.basic.service.SubjectCategoryService;
 import com.jingdianjichi.subject.infra.basic.service.SubjectLabelService;
 import com.jingdianjichi.subject.infra.basic.service.SubjectMappingService;
 import lombok.extern.slf4j.Slf4j;
@@ -37,6 +40,8 @@ public class SubjectLabelDomainServiceImpl implements SubjectLabelDomainService 
     private SubjectLabelService subjectLabelService;
     @Resource
     private SubjectMappingService subjectMappingService;
+    @Resource
+    private SubjectCategoryService subjectCategoryService;
 
     @Override
     public Boolean add(SubjectLabelBO subjectLabelBO) {
@@ -65,6 +70,15 @@ public class SubjectLabelDomainServiceImpl implements SubjectLabelDomainService 
 
     @Override
     public List<SubjectLabelBO> queryLabelByCategoryId(SubjectLabelBO subjectLabelBO) {
+        SubjectCategory subjectCategory = subjectCategoryService.queryById(subjectLabelBO.getCategoryId());
+        if (subjectCategory != null && CategoryTypeEnum.Primary.getCode() == subjectCategory.getCategoryType()) {
+            SubjectLabel subjectLabel = new SubjectLabel();
+            subjectLabel.setCategoryId(subjectLabelBO.getCategoryId());
+            subjectCategory.setIsDeleted(IsDeletedFlagEnum.UN_DELETED.getCode());
+            List<SubjectLabel> subjectLabelList = subjectLabelService.queryByCondition(subjectLabel);
+            return SubjectLabelBOConverter.INSTANCE.convert(subjectLabelList);
+        }
+
         SubjectMapping subjectMapping = new SubjectMapping();
         subjectMapping.setCategoryId(subjectLabelBO.getCategoryId());
         subjectMapping.setIsDeleted(IsDeletedFlagEnum.UN_DELETED.getCode());
@@ -75,17 +89,7 @@ public class SubjectLabelDomainServiceImpl implements SubjectLabelDomainService 
 
         List<Long> idList = subjectMappingList.stream().map(SubjectMapping::getLabelId).collect(Collectors.toList());
         List<SubjectLabel> subjectLabelList = subjectLabelService.batchQueryByIds(idList);
-
-        List<SubjectLabelBO> subjectLabelBOList = new ArrayList<>();
-        for (SubjectLabel subjectLabel : subjectLabelList) {
-            SubjectLabelBO bo = new SubjectLabelBO();
-            bo.setId(subjectLabel.getId());
-            bo.setLabelName(subjectLabel.getLabelName());
-            bo.setSortNum(subjectLabel.getSortNum());
-            bo.setCategoryId(subjectLabelBO.getCategoryId());
-            subjectLabelBOList.add(bo);
-        }
-        return subjectLabelBOList;
+        return SubjectLabelBOConverter.INSTANCE.convert(subjectLabelList);
     }
 
 }

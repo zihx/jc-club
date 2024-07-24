@@ -69,4 +69,9 @@ public class SubjectLabelServiceImpl implements SubjectLabelService {
     public List<SubjectLabel> batchQueryByIds(List<Long> idList) {
         return subjectLabelMapper.batchQueryByIds(idList);
     }
+
+    @Override
+    public List<SubjectLabel> queryByCondition(SubjectLabel subjectLabel) {
+        return subjectLabelMapper.queryByCondition(subjectLabel);
+    }
 }
