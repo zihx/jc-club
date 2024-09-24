@@ -1,5 +1,5 @@
 server:
-  port: 4000
+  port: 4001
 
 minio:
   url: http://192.168.88.130:9000

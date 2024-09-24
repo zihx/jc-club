@@ -31,10 +31,7 @@ public class Result<T> implements Serializable {
     }
 
     public static <T> Result ok(T data) {
-        Result result = new Result();
-        result.setSuccess(true);
-        result.setCode(ResultCodeEnum.SUCCESS.getCode());
-        result.setMessage(ResultCodeEnum.SUCCESS.getDesc());
+        Result result = ok();
         result.setData(data);
         return result;
     }
@@ -48,10 +45,7 @@ public class Result<T> implements Serializable {
     }
 
     public static <T> Result fail(T data) {
-        Result result = new Result();
-        result.setSuccess(false);
-        result.setCode(ResultCodeEnum.FAIL.getCode());
-        result.setMessage(ResultCodeEnum.FAIL.getDesc());
+        Result result = fail();
         result.setData(data);
         return result;
     }
