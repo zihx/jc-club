@@ -50,12 +50,11 @@ public class SubjectDomainServiceImpl implements SubjectDomainService {
     public void add(SubjectInfoBO subjectInfoBO) {
         SubjectInfo subjectInfo = SubjectInfoBOConverter.INSTANCE.convert(subjectInfoBO);
         subjectInfo.setIsDeleted(IsDeletedFlagEnum.UN_DELETED.getCode());
-
         subjectInfoService.insert(subjectInfo);
 
         Long id = subjectInfo.getId();
-
         subjectInfoBO.setId(id);
+
         SubjectTypeHandler subjectTypeHandler = subjectTypeHandlerFactory.getHandler(subjectInfo.getSubjectType());
         subjectTypeHandler.add(subjectInfoBO);
 
@@ -75,48 +74,52 @@ public class SubjectDomainServiceImpl implements SubjectDomainService {
 
     @Override
     public PageResult<SubjectInfoBO> getSubjectPage(SubjectInfoBO subjectInfoBO) {
-        PageResult<SubjectInfoBO> pageResult = new PageResult<>();
         int pageNo = subjectInfoBO.getPageNo(), pageSize = subjectInfoBO.getPageSize();
+        long categoryId = subjectInfoBO.getCategoryId(), labelId = subjectInfoBO.getLabelId();
+
+        PageResult<SubjectInfoBO> pageResult = new PageResult<>();
         pageResult.setPageNo(pageNo);
         pageResult.setPageSize(pageSize);
+
+        // 偏移量，即需要跳过的记录数
         int offset = (pageNo - 1) * pageSize;
 
         SubjectInfo subjectInfo = SubjectInfoBOConverter.INSTANCE.convert(subjectInfoBO);
         subjectInfo.setIsDeleted(IsDeletedFlagEnum.UN_DELETED.getCode());
-
-        Long categoryId = subjectInfoBO.getCategoryId(), labelId = subjectInfoBO.getLabelId();
         int count = subjectInfoService.countByCondition(subjectInfo, categoryId, labelId);
         if (count == 0) {
             return pageResult;
         }
+        pageResult.setTotal(count);
 
         List<SubjectInfo> subjectInfoList = subjectInfoService.queryPage(subjectInfo, categoryId, labelId, offset, pageSize);
-
         List<SubjectInfoBO> subjectInfoBOList = SubjectInfoBOConverter.INSTANCE.convert(subjectInfoList);
         pageResult.setRecords(subjectInfoBOList);
-        pageResult.setTotal(count);
+
         return pageResult;
     }
 
     @Override
     public SubjectInfoBO querySubjectInfo(SubjectInfoBO subjectInfoBO) {
+        // 获取题目信息
         SubjectInfo subjectInfo = subjectInfoService.queryById(subjectInfoBO.getId());
-        // 根据题目类型获取相应的处理类
+
+        // 根据题目类型获取相应的处理类从而获取选项或答案
         SubjectTypeHandler subjectTypeHandler = subjectTypeHandlerFactory.getHandler(subjectInfo.getSubjectType());
         SubjectOptionBO subjectOptionBO = subjectTypeHandler.query(subjectInfo.getId());
+
         subjectInfoBO = SubjectInfoBOConverter.INSTANCE.convert(subjectInfo, subjectOptionBO);
 
+        // 获取题目对应的标签
         SubjectMapping subjectMapping = new SubjectMapping();
         subjectMapping.setSubjectId(subjectInfo.getId());
         subjectMapping.setIsDeleted(IsDeletedFlagEnum.UN_DELETED.getCode());
         List<SubjectMapping> subjectMappingList = subjectMappingService.queryLabelId(subjectMapping);
-        // 获取题目包含的labelId
         List<Long> labelIds = subjectMappingList.stream().map(SubjectMapping::getLabelId).collect(Collectors.toList());
-        // 根据labelId查询label信息
         List<SubjectLabel> subjectLabelList = subjectLabelService.batchQueryByIds(labelIds);
-        // 获取label名称
         List<String> labelNameList = subjectLabelList.stream().map(SubjectLabel::getLabelName).collect(Collectors.toList());
         subjectInfoBO.setLabelName(labelNameList);
+
         return subjectInfoBO;
     }
 }

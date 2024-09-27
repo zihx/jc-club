@@ -10,7 +10,7 @@ import javax.annotation.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-09-21T13:51:19+0800",
+    date = "2024-09-27T13:36:24+0800",
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 1.8.0_212 (Oracle Corporation)"
 )
 public class SubjectInfoDTOConverterImpl implements SubjectInfoDTOConverter {
@@ -70,15 +70,15 @@ public class SubjectInfoDTOConverterImpl implements SubjectInfoDTOConverter {
         subjectInfoDTO.setSubjectScore( subjectInfoBO.getSubjectScore() );
         subjectInfoDTO.setSubjectParse( subjectInfoBO.getSubjectParse() );
         subjectInfoDTO.setSubjectAnswer( subjectInfoBO.getSubjectAnswer() );
-        List<Long> list = subjectInfoBO.getCategoryIds();
-        if ( list != null ) {
-            subjectInfoDTO.setCategoryIds( new ArrayList<Long>( list ) );
-        }
-        List<Long> list1 = subjectInfoBO.getLabelIds();
-        if ( list1 != null ) {
-            subjectInfoDTO.setLabelIds( new ArrayList<Long>( list1 ) );
-        }
         subjectInfoDTO.setOptionList( optionBOListToOptionDTOList( subjectInfoBO.getOptionList() ) );
+        List<Long> list1 = subjectInfoBO.getCategoryIds();
+        if ( list1 != null ) {
+            subjectInfoDTO.setCategoryIds( new ArrayList<Long>( list1 ) );
+        }
+        List<Long> list2 = subjectInfoBO.getLabelIds();
+        if ( list2 != null ) {
+            subjectInfoDTO.setLabelIds( new ArrayList<Long>( list2 ) );
+        }
         subjectInfoDTO.setCategoryId( subjectInfoBO.getCategoryId() );
         subjectInfoDTO.setLabelId( subjectInfoBO.getLabelId() );
         List<String> list3 = subjectInfoBO.getLabelName();

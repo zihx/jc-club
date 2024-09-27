@@ -17,25 +17,47 @@ import java.util.List;
  */
 @Data
 public class PageResult<T> implements Serializable {
+
+    /**
+     * 页码
+     */
     private Integer pageNo;
 
+    /**
+     * 每页记录数
+     */
     private Integer pageSize;
 
+    /**
+     * 总记录数
+     */
     private Integer total = 0;
 
+    /**
+     * 总页数
+     */
     private Integer totalPages = 0;
 
+    /**
+     * 该页的数据
+     */
     private List<T> result = Collections.emptyList();
 
+    /**
+     * 该页的起始序号
+     */
     private Integer start = 0;
 
+    /**
+     * 该页的结束序号
+     */
     private Integer end = 0;
 
     public void setRecords(List<T> result) {
         this.result = result;
-        if (result != null && !result.isEmpty()) {
-            setTotal(result.size());
-        }
+        // if (result != null && !result.isEmpty()) {
+        //     setTotal(result.size());
+        // }
     }
 
     public void setTotal(Integer total) {
@@ -45,9 +67,9 @@ public class PageResult<T> implements Serializable {
         } else {
             this.totalPages = 0;
         }
-        // 该页的页码显示起始和结束序号
-        this.start = (this.pageSize > 0 ? (this.pageNo - 1) * this.pageSize : 0) + 1;
-        this.end = (this.start - 1 + this.pageSize * (this.pageNo > 0 ? 1 : 0));
+
+        this.start = (this.pageNo - 1) * this.pageSize + 1;
+        this.end = this.pageNo * this.pageSize;
     }
 
     public void setPageNo(Integer pageNo) {

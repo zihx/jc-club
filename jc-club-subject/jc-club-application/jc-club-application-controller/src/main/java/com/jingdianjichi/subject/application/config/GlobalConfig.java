@@ -36,19 +36,23 @@ import java.util.List;
 @Configuration
 public class GlobalConfig extends WebMvcConfigurationSupport {
 
+    private static final String DEFAULT_LOCAL_DATE_TIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
+    private static final String DEFAULT_LOCAL_DATE_FORMAT = "yyyy-MM-dd";
+    private static final String DEFAULT_LOCAL_TIME_FORMAT = "HH:mm:ss";
+
     @Override
     public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
         // 保留父类的配置
         super.configureMessageConverters(converters);
+
         converters.add(mappingJackson2HttpMessageConverter());
     }
 
-    private static final String DEFAULT_LOCAL_DATE_TIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
-    private static final String DEFAULT_LOCAL_DATE_FORMAT = "yyyy-MM-dd";
-    private static final String DEFAULT_LOCAL_TIME_FORMAT = "HH:mm:ss";
     // 对返回给前端的Json对象进行处理
     private MappingJackson2HttpMessageConverter mappingJackson2HttpMessageConverter() {
         ObjectMapper objectMapper = new ObjectMapper();
+
+
         // 默认Jackson在试图序列化一个没有可序列化字段的bean（即一个空bean，没有任何公共字段、getter方法或@JsonInclude注解的字段）时，会抛出异常
         objectMapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
         // 在序列化Java对象为JSON时，只有那些值不为null的字段才会被包含在输出的JSON中
