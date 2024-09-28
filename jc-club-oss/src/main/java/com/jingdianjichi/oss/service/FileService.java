@@ -19,13 +19,13 @@ import java.util.List;
 public class FileService {
 
     @Resource
-    private StorageAdapter storageService;
+    private StorageAdapter storageAdapter;
 
     public List<String> getAllBuckets() throws Exception {
-        return storageService.getAllBuckets();
+        return storageAdapter.getAllBuckets();
     }
 
     public void createBucket(String bucketName) throws Exception {
-        storageService.createBucket(bucketName);
+        storageAdapter.createBucket(bucketName);
     }
 }

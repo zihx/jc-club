@@ -3,8 +3,8 @@ server:
 
 minio:
   url: http://192.168.88.130:9000
-  accessKey: zihuanxue
-  secretKey: qs3cbrconlyone
+  accessKey: minioadmin
+  secretKey: minioadmin
 
 #storage:
 #  service:
