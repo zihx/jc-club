@@ -10,6 +10,8 @@ spring:
           predicates:
             # 该路径的请求，都会被转发到上述指定服务
             - Path=/oss/**
+#          filters:
+#            - StripPrefix=1
         - id: auth
           uri: lb://jc-club-auth
           predicates:

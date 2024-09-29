@@ -1,0 +1,5 @@
+mybatis-plus:
+  type-aliases-package: com.jingdianjichi.auth.infra.basic.entity
+  global-config:
+    db-config:
+      id-type: auto
