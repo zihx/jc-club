@@ -37,9 +37,8 @@ public class AuthUserServiceImpl implements AuthUserService {
      * @return 实例对象
      */
     @Override
-    public AuthUser insert(AuthUser authUser) {
-        this.authUserMapper.insert(authUser);
-        return authUser;
+    public Integer insert(AuthUser authUser) {
+        return this.authUserMapper.insert(authUser);
     }
 
     /**
