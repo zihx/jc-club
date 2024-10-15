@@ -69,4 +69,5 @@ public interface AuthRoleMapper {
      */
     int deleteById(Long id);
 
+    AuthRole queryByCondition(AuthRole authRole);
 }

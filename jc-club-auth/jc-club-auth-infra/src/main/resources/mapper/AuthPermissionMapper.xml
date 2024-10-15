@@ -21,7 +21,7 @@
  
     <!--查询单个-->
     <select id="queryById" resultMap="AuthPermissionMap">
-        select idnameparent_idtypemenu_urlstatusshowiconpermission_keycreated_bycreated_timeupdate_byupdate_timeis_deleted 
+        select id,name,parent_id,type,menu_url,status,show,icon,permission_key,created_by,created_time,update_by,update_time,is_deleted
         from auth_permission
         where id = #{id}
     </select>

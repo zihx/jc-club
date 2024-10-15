@@ -10,6 +10,7 @@ import com.jingdianjichi.auth.common.entity.Result;
 import com.jingdianjichi.auth.common.enums.IsDeletedFlagEnum;
 import com.jingdianjichi.auth.domain.bo.AuthUserBO;
 import com.jingdianjichi.auth.domain.service.AuthUserDomainService;
+import com.jingdianjichi.auth.domain.service.AuthUserRoleDomainService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.PostMapping;

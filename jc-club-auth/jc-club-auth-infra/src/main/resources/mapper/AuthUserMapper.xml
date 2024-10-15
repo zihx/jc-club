@@ -23,7 +23,7 @@
  
     <!--查询单个-->
     <select id="queryById" resultMap="AuthUserMap">
-        select iduser_namenick_nameemailphonepasswordsexavatarstatusintroduceext_jsoncreated_bycreated_timeupdate_byupdate_timeis_deleted 
+        select id,user_name,nick_name,email,phone,password,sex,avatar,status,introduce,ext_json,created_by,created_time,update_by,update_time,is_deleted
         from auth_user
         where id = #{id}
     </select>

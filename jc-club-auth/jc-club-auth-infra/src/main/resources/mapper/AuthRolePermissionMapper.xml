@@ -15,7 +15,7 @@
  
     <!--查询单个-->
     <select id="queryById" resultMap="AuthRolePermissionMap">
-        select idrole_idpermission_idcreated_bycreated_timeupdate_byupdate_timeis_deleted 
+        select id,role_id,permission_id,created_by,created_time,update_by,update_time,is_deleted
         from auth_role_permission
         where id = #{id}
     </select>

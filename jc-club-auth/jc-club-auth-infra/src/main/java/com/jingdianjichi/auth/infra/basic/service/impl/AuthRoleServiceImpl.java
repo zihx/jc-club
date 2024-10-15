@@ -62,4 +62,9 @@ public class AuthRoleServiceImpl implements AuthRoleService {
     public boolean deleteById(Long id) {
         return this.authRoleMapper.deleteById(id) > 0;
     }
+
+    @Override
+    public AuthRole queryByCondition(AuthRole authRole) {
+        return this.authRoleMapper.queryByCondition(authRole);
+    }
 }
