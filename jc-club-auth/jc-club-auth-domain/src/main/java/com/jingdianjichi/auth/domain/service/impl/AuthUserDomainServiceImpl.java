@@ -1,7 +1,7 @@
 package com.jingdianjichi.auth.domain.service.impl;
 
 import cn.dev33.satoken.secure.SaSecureUtil;
-import com.jingdianjichi.auth.common.enums.AuthUserStatusEnum;
+import com.jingdianjichi.auth.common.enums.StatusEnum;
 import com.jingdianjichi.auth.common.enums.IsDeletedFlagEnum;
 import com.jingdianjichi.auth.domain.bo.AuthUserBO;
 import com.jingdianjichi.auth.domain.convert.AuthUserBOConverter;
@@ -47,7 +47,7 @@ public class AuthUserDomainServiceImpl implements AuthUserDomainService {
     public Boolean register(AuthUserBO authUserBO) {
         AuthUser authUser = AuthUserBOConverter.INSTANCE.convert(authUserBO);
         authUser.setPassword(SaSecureUtil.md5BySalt(authUser.getPassword(), SALT));
-        authUser.setStatus(AuthUserStatusEnum.OPEN.getCode());
+        authUser.setStatus(StatusEnum.OPEN.getCode());
         authUser.setIsDeleted(IsDeletedFlagEnum.UN_DELETED.getCode());
         Integer count = authUserService.insert(authUser);
 

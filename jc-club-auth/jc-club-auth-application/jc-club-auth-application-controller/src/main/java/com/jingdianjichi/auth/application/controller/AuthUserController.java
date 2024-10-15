@@ -37,7 +37,6 @@ public class AuthUserController {
     @Resource
     private AuthUserDomainService authUserDomainService;
 
-
     @PostMapping("register")
     public Result<Boolean> register(@RequestBody AuthUserDTO authUserDTO) {
         try {

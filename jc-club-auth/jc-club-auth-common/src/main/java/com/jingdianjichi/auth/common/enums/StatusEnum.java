@@ -12,7 +12,7 @@ import lombok.Getter;
  * @Version 1.0
  */
 @Getter
-public enum AuthUserStatusEnum {
+public enum StatusEnum {
 
     OPEN(0,"启用"),
     CLOSE(1,"禁用");
@@ -20,7 +20,7 @@ public enum AuthUserStatusEnum {
     private int code;
     private String desc;
 
-    AuthUserStatusEnum(int code, String desc){
+    StatusEnum(int code, String desc){
         this.code = code;
         this.desc = desc;
     }

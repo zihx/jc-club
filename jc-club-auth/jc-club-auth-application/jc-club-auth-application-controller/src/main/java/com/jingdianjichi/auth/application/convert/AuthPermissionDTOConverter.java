@@ -18,5 +18,5 @@ import org.mapstruct.factory.Mappers;
 public interface AuthPermissionDTOConverter {
     AuthPermissionDTOConverter INSTANCE = Mappers.getMapper(AuthPermissionDTOConverter.class);
 
-    AuthPermissionBO toAuthPermissionDTO(AuthPermissionDTO authPermissionDTO);
+    AuthPermissionBO convert(AuthPermissionDTO authPermissionDTO);
 }

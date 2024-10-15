@@ -72,7 +72,7 @@ public class AuthRoleController {
 
             return Result.ok(authRoleDomainService.delete(authRoleBO));
         } catch (Exception e) {
-            return Result.fail("更新角色失败");
+            return Result.fail("删除角色失败");
         }
     }
 }

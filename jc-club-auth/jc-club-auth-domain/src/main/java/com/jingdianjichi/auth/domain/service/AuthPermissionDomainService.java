@@ -1,5 +1,7 @@
 package com.jingdianjichi.auth.domain.service;
 
+import com.jingdianjichi.auth.domain.bo.AuthPermissionBO;
+
 /**
  * ClassName: AuthPermissionDomainService
  * Package: com.jingdianjichi.auth.domain.service
@@ -10,4 +12,9 @@ package com.jingdianjichi.auth.domain.service;
  * @Version 1.0
  */
 public interface AuthPermissionDomainService {
+    Boolean add(AuthPermissionBO authPermissionBO);
+
+    Boolean update(AuthPermissionBO authPermissionBO);
+
+    Boolean delete(AuthPermissionBO authPermissionBO);
 }
