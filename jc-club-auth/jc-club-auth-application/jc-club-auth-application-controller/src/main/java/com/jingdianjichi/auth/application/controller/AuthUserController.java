@@ -7,6 +7,7 @@ import com.google.common.base.Preconditions;
 import com.jingdianjichi.auth.application.convert.AuthUserDTOConverter;
 import com.jingdianjichi.auth.application.dto.AuthUserDTO;
 import com.jingdianjichi.auth.common.entity.Result;
+import com.jingdianjichi.auth.common.enums.IsDeletedFlagEnum;
 import com.jingdianjichi.auth.domain.bo.AuthUserBO;
 import com.jingdianjichi.auth.domain.service.AuthUserDomainService;
 import lombok.extern.slf4j.Slf4j;
@@ -47,6 +48,43 @@ public class AuthUserController {
             return Result.ok(authUserDomainService.register(authUserBO));
         } catch (Exception e) {
             return Result.fail("注册用户失败");
+        }
+    }
+
+    @PostMapping("update")
+    public Result<Boolean> update(@RequestBody AuthUserDTO authUserDTO) {
+        try {
+            Preconditions.checkNotNull(authUserDTO.getId(), "用户ID不能为空");
+
+            AuthUserBO authUserBO = AuthUserDTOConverter.INSTANCE.convert(authUserDTO);
+            return Result.ok(authUserDomainService.update(authUserBO));
+        } catch (Exception e) {
+            return Result.fail("更新用户失败");
+        }
+    }
+
+    @PostMapping("changeStatus")
+    public Result<Boolean> changeStatus(@RequestBody AuthUserDTO authUserDTO) {
+        try {
+            Preconditions.checkNotNull(authUserDTO.getId(), "用户ID不能为空");
+            Preconditions.checkNotNull(authUserDTO.getStatus(), "状态不能为空");
+
+            AuthUserBO authUserBO = AuthUserDTOConverter.INSTANCE.convert(authUserDTO);
+            return Result.ok(authUserDomainService.changeStatus(authUserBO));
+        } catch (Exception e) {
+            return Result.fail("更新用户失败");
+        }
+    }
+
+    @PostMapping("delete")
+    public Result<Boolean> delete(@RequestBody AuthUserDTO authUserDTO) {
+        try {
+            Preconditions.checkNotNull(authUserDTO.getId(), "用户ID不能为空");
+
+            AuthUserBO authUserBO = AuthUserDTOConverter.INSTANCE.convert(authUserDTO);
+            return Result.ok(authUserDomainService.delete(authUserBO));
+        } catch (Exception e) {
+            return Result.fail("更新用户失败");
         }
     }
 

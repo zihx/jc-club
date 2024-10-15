@@ -37,9 +37,8 @@ public class AuthRoleServiceImpl implements AuthRoleService {
      * @return 实例对象
      */
     @Override
-    public AuthRole insert(AuthRole authRole) {
-        this.authRoleMapper.insert(authRole);
-        return authRole;
+    public Integer insert(AuthRole authRole) {
+        return this.authRoleMapper.insert(authRole);
     }
 
     /**
@@ -49,9 +48,8 @@ public class AuthRoleServiceImpl implements AuthRoleService {
      * @return 实例对象
      */
     @Override
-    public AuthRole update(AuthRole authRole) {
-        this.authRoleMapper.update(authRole);
-        return this.queryById(authRole.getId());
+    public Integer update(AuthRole authRole) {
+        return this.authRoleMapper.update(authRole);
     }
 
     /**

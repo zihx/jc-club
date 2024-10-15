@@ -1,5 +1,6 @@
 package com.jingdianjichi.auth.domain.service.impl;
 
+import cn.dev33.satoken.secure.SaSecureUtil;
 import com.jingdianjichi.auth.common.enums.AuthUserStatusEnum;
 import com.jingdianjichi.auth.common.enums.IsDeletedFlagEnum;
 import com.jingdianjichi.auth.domain.bo.AuthUserBO;
@@ -28,13 +29,41 @@ public class AuthUserDomainServiceImpl implements AuthUserDomainService {
     @Resource
     private AuthUserService authUserService;
 
+    private static final String SALT = "zihuanxue";
+
     @Override
     public Boolean register(AuthUserBO authUserBO) {
         AuthUser authUser = AuthUserBOConverter.INSTANCE.convert(authUserBO);
+        authUser.setPassword(SaSecureUtil.md5BySalt(authUser.getPassword(), SALT));
         authUser.setStatus(AuthUserStatusEnum.OPEN.getCode());
         authUser.setIsDeleted(IsDeletedFlagEnum.UN_DELETED.getCode());
 
         Integer count = authUserService.insert(authUser);
+        return count > 0;
+    }
+
+    @Override
+    public Boolean update(AuthUserBO authUserBO) {
+        AuthUser authUser = AuthUserBOConverter.INSTANCE.convert(authUserBO);
+
+        Integer count = authUserService.update(authUser);
+        return count > 0;
+    }
+
+    @Override
+    public Boolean changeStatus(AuthUserBO authUserBO) {
+        AuthUser authUser = AuthUserBOConverter.INSTANCE.convert(authUserBO);
+
+        Integer count = authUserService.update(authUser);
+        return count > 0;
+    }
+
+    @Override
+    public Boolean delete(AuthUserBO authUserBO) {
+        AuthUser authUser = AuthUserBOConverter.INSTANCE.convert(authUserBO);
+        authUser.setIsDeleted(IsDeletedFlagEnum.DELETED.getCode());
+
+        Integer count = authUserService.update(authUser);
         return count > 0;
     }
 }
