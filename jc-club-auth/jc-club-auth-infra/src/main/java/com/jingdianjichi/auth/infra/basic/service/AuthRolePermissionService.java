@@ -2,6 +2,8 @@ package com.jingdianjichi.auth.infra.basic.service;
 
 import com.jingdianjichi.auth.infra.basic.entity.AuthRolePermission;
 
+import java.util.List;
+
 
 /**
  * 角色权限关联表(AuthRolePermission)表服务接口
@@ -25,7 +27,7 @@ public interface AuthRolePermissionService {
      * @param authRolePermission 实例对象
      * @return 实例对象
      */
-    AuthRolePermission insert(AuthRolePermission authRolePermission);
+    Integer insert(AuthRolePermission authRolePermission);
 
     /**
      * 修改数据
@@ -33,7 +35,7 @@ public interface AuthRolePermissionService {
      * @param authRolePermission 实例对象
      * @return 实例对象
      */
-    AuthRolePermission update(AuthRolePermission authRolePermission);
+    Integer update(AuthRolePermission authRolePermission);
 
     /**
      * 通过主键删除数据
@@ -43,4 +45,5 @@ public interface AuthRolePermissionService {
      */
     boolean deleteById(Long id);
 
+    int insertBatch(List<AuthRolePermission> authRolePermissionList);
 }

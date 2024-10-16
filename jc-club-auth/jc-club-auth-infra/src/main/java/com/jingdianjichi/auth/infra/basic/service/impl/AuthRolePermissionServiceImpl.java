@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * 角色权限关联表(AuthRolePermission)表服务实现类
@@ -37,9 +38,8 @@ public class AuthRolePermissionServiceImpl implements AuthRolePermissionService 
      * @return 实例对象
      */
     @Override
-    public AuthRolePermission insert(AuthRolePermission authRolePermission) {
-        this.authRolePermissionMapper.insert(authRolePermission);
-        return authRolePermission;
+    public Integer insert(AuthRolePermission authRolePermission) {
+        return this.authRolePermissionMapper.insert(authRolePermission);
     }
 
     /**
@@ -49,9 +49,8 @@ public class AuthRolePermissionServiceImpl implements AuthRolePermissionService 
      * @return 实例对象
      */
     @Override
-    public AuthRolePermission update(AuthRolePermission authRolePermission) {
-        this.authRolePermissionMapper.update(authRolePermission);
-        return this.queryById(authRolePermission.getId());
+    public Integer update(AuthRolePermission authRolePermission) {
+        return this.authRolePermissionMapper.update(authRolePermission);
     }
 
     /**
@@ -63,5 +62,10 @@ public class AuthRolePermissionServiceImpl implements AuthRolePermissionService 
     @Override
     public boolean deleteById(Long id) {
         return this.authRolePermissionMapper.deleteById(id) > 0;
+    }
+
+    @Override
+    public int insertBatch(List<AuthRolePermission> authRolePermissionList) {
+        return authRolePermissionMapper.insertBatch(authRolePermissionList);
     }
 }
