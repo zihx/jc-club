@@ -1,5 +1,6 @@
 package com.jingdianjichi.auth.domain.service;
 
+import cn.dev33.satoken.stp.SaTokenInfo;
 import com.jingdianjichi.auth.domain.bo.AuthUserBO;
 import org.springframework.context.annotation.Bean;
 
@@ -21,4 +22,6 @@ public interface AuthUserDomainService {
     Boolean delete(AuthUserBO authUserBO);
 
     Boolean changeStatus(AuthUserBO authUserBO);
+
+    SaTokenInfo doLogin(String validCode);
 }
