@@ -47,7 +47,7 @@ public class AuthUserController {
             AuthUserBO authUserBO = AuthUserDTOConverter.INSTANCE.convert(authUserDTO);
             return Result.ok(authUserDomainService.register(authUserBO));
         } catch (Exception e) {
-            return Result.fail("注册用户失败");
+            return Result.fail(e.getMessage());
         }
     }
 

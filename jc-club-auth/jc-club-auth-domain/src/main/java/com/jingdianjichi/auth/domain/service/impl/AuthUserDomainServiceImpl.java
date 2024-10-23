@@ -1,22 +1,23 @@
 package com.jingdianjichi.auth.domain.service.impl;
 
 import cn.dev33.satoken.secure.SaSecureUtil;
+import com.google.gson.Gson;
 import com.jingdianjichi.auth.common.enums.StatusEnum;
 import com.jingdianjichi.auth.common.enums.IsDeletedFlagEnum;
 import com.jingdianjichi.auth.domain.bo.AuthUserBO;
 import com.jingdianjichi.auth.domain.convert.AuthUserBOConverter;
+import com.jingdianjichi.auth.domain.redis.RedisUtil;
 import com.jingdianjichi.auth.domain.service.AuthUserDomainService;
-import com.jingdianjichi.auth.infra.basic.entity.AuthRole;
-import com.jingdianjichi.auth.infra.basic.entity.AuthUser;
-import com.jingdianjichi.auth.infra.basic.entity.AuthUserRole;
-import com.jingdianjichi.auth.infra.basic.service.AuthRoleService;
-import com.jingdianjichi.auth.infra.basic.service.AuthUserRoleService;
-import com.jingdianjichi.auth.infra.basic.service.AuthUserService;
+import com.jingdianjichi.auth.infra.basic.entity.*;
+import com.jingdianjichi.auth.infra.basic.service.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * ClassName: AuthUserDomainServiceImpl
@@ -37,10 +38,17 @@ public class AuthUserDomainServiceImpl implements AuthUserDomainService {
     private AuthRoleService authRoleService;
     @Resource
     private AuthUserRoleService authUserRoleService;
+    @Resource
+    private RedisUtil redisUtil;
+    @Resource
+    private AuthRolePermissionService authRolePermissionService;
+    @Resource
+    private AuthPermissionService authPermissionService;
 
     private static final String SALT = "zihuanxue";
-
     private static final String NORMAL_USER = "normal_user";
+    private final String AUTH_PERMISSION_PREFIX = "auth.permission";
+    private final String AUTH_ROLE_PREFIX = "auth.role";
 
     @Override
     @Transactional
@@ -60,6 +68,21 @@ public class AuthUserDomainServiceImpl implements AuthUserDomainService {
         authUserRole.setRoleId(authRole.getId());
         authUserRole.setIsDeleted(IsDeletedFlagEnum.UN_DELETED.getCode());
         authUserRoleService.insert(authUserRole);
+
+        String roleKey = redisUtil.buildKey(AUTH_ROLE_PREFIX, authUser.getUserName());
+        List<AuthRole> authRoleList = new ArrayList<>();
+        authRoleList.add(authRole);
+        redisUtil.set(roleKey, new Gson().toJson(authRoleList));
+
+        AuthRolePermission authRolePermission = new AuthRolePermission();
+        authRolePermission.setRoleId(authRole.getId());
+        authRolePermission.setIsDeleted(IsDeletedFlagEnum.UN_DELETED.getCode());
+        List<AuthRolePermission> authRolePermissionList = authRolePermissionService.queryByCondition(authRolePermission);
+
+        List<Long> permissionIdList = authRolePermissionList.stream().map(AuthRolePermission::getPermissionId).collect(Collectors.toList());
+        List<AuthPermission> authPermissionList = authPermissionService.queryByIdList(permissionIdList);
+        String permissionKey = redisUtil.buildKey(AUTH_PERMISSION_PREFIX, authUser.getUserName());
+        redisUtil.set(permissionKey, new Gson().toJson(authPermissionList));
 
         return count > 0;
     }

@@ -34,18 +34,18 @@ public class StpInterfaceImpl implements StpInterface {
     @Resource
     private RedisUtil redisUtil;
 
-    private final String authPermissionPrefix = "auth.permission";
+    private final String AUTH_PERMISSION_PREFIX = "auth.permission";
 
-    private final String authRolePrefix = "auth.role";
+    private final String AUTH_ROLE_PREFIX = "auth.role";
 
     @Override
     public List<String> getPermissionList(Object loginId, String loginType) {
-        return getAuth(authPermissionPrefix, loginId.toString());
+        return getAuth(AUTH_PERMISSION_PREFIX, loginId.toString());
     }
 
     @Override
     public List<String> getRoleList(Object loginId, String loginType) {
-        return getAuth(authRolePrefix, loginId.toString());
+        return getAuth(AUTH_ROLE_PREFIX, loginId.toString());
     }
 
     private List<String> getAuth(String prefix, String loginId) {
@@ -55,11 +55,11 @@ public class StpInterfaceImpl implements StpInterface {
             return Collections.emptyList();
         }
         List<String> authList = new ArrayList<>();
-        if (authRolePrefix.equals(prefix)) {
+        if (AUTH_ROLE_PREFIX.equals(prefix)) {
             List<AuthRole> roleList = new Gson().fromJson(authValue, new TypeToken<List<AuthRole>>() {
             }.getType());
             authList = roleList.stream().map(AuthRole::getRoleKey).collect(Collectors.toList());
-        } else if (authPermissionPrefix.equals(prefix)) {
+        } else if (AUTH_PERMISSION_PREFIX.equals(prefix)) {
             List<AuthPermission> permissionList = new Gson().fromJson(authValue, new TypeToken<List<AuthPermission>>() {
             }.getType());
             authList = permissionList.stream().map(AuthPermission::getPermissionKey).collect(Collectors.toList());

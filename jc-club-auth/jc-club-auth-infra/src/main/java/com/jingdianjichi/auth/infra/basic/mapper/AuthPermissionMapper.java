@@ -8,7 +8,7 @@ import java.util.List;
  * (AuthPermission)表数据库访问层
  *
  * @author makejava
- * @since 2024-09-28 21:08:07
+ * @since 2024-10-20 20:58:28
  */
 public interface AuthPermissionMapper {
 
@@ -19,6 +19,14 @@ public interface AuthPermissionMapper {
      * @return 实例对象
      */
     AuthPermission queryById(Long id);
+    
+    /**
+     * 通过ID列表查询多条数据
+     *
+     * @param entities List<Long> 主键列表
+     * @return 实例对象列表
+     */
+    List<AuthPermission> queryByIdList(@Param("entities") List<Long> entities);
 
     /**
      * 统计总行数
@@ -68,5 +76,12 @@ public interface AuthPermissionMapper {
      * @return 影响行数
      */
     int deleteById(Long id);
-
+    
+    /**
+     * 条件查询
+     *
+     * @param authPermission 实例对象
+     * @return 实例对象
+     */
+    List<AuthPermission> queryByCondition(AuthPermission authPermission);
 }

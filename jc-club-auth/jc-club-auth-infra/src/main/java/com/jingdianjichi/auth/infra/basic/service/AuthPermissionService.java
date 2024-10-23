@@ -1,13 +1,14 @@
 package com.jingdianjichi.auth.infra.basic.service;
 
 import com.jingdianjichi.auth.infra.basic.entity.AuthPermission;
+import java.util.List;
 
 
 /**
  * (AuthPermission)表服务接口
  *
  * @author makejava
- * @since 2024-09-28 21:08:09
+ * @since 2024-10-20 20:52:00
  */
 public interface AuthPermissionService {
 
@@ -18,15 +19,31 @@ public interface AuthPermissionService {
      * @return 实例对象
      */
     AuthPermission queryById(Long id);
+    
+    /**
+     * 通过ID列表查询多条数据
+     *
+     * @param idList 主键列表
+     * @return 实例对象列表
+     */
+    List<AuthPermission> queryByIdList(List<Long> idList);
 
     /**
      * 新增数据
      *
      * @param authPermission 实例对象
-     * @return 实例对象
+     * @return 影响行数
      */
     Integer insert(AuthPermission authPermission);
 
+    /**
+     * 批量新增数据
+     *
+     * @param authPermissionList 实例对象列表
+     * @return 影响行数
+     */
+    Integer insertBatch(List<AuthPermission> authPermissionList);
+    
     /**
      * 修改数据
      *
@@ -43,4 +60,11 @@ public interface AuthPermissionService {
      */
     boolean deleteById(Long id);
 
+    /**
+     * 条件查询
+     *
+     * @param authPermission 实例对象
+     * @return 实例对象
+     */
+    List<AuthPermission> queryByCondition(AuthPermission authPermission);
 }
