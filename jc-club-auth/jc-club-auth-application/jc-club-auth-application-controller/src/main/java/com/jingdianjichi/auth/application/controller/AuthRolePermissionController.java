@@ -45,7 +45,8 @@ public class AuthRolePermissionController {
             AuthRolePermissionBO authRolePermissionBO = AuthRolePermissionDTOConverter.INSTANCE.convert(authRolePermissionDTO);
             return Result.ok(authRolePermissionDomainService.add(authRolePermissionBO));
         } catch (Exception e) {
-            return Result.fail(e.getMessage());
+            log.error("AuthRolePermissionController.add.error:{}", e.getMessage());
+            return Result.fail("添加角色权限失败");
         }
     }
 }

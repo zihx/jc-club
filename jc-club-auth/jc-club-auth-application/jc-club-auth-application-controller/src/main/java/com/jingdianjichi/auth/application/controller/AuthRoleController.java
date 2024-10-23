@@ -46,6 +46,7 @@ public class AuthRoleController {
 
             return Result.ok(authRoleDomainService.add(authRoleBO));
         } catch (Exception e) {
+            log.error("AuthRoleController.add.error:{}", e.getMessage());
             return Result.fail("添加角色失败");
         }
     }
@@ -59,6 +60,7 @@ public class AuthRoleController {
 
             return Result.ok(authRoleDomainService.update(authRoleBO));
         } catch (Exception e) {
+            log.error("AuthRoleController.update.error:{}", e.getMessage());
             return Result.fail("更新角色失败");
         }
     }
@@ -72,6 +74,7 @@ public class AuthRoleController {
 
             return Result.ok(authRoleDomainService.delete(authRoleBO));
         } catch (Exception e) {
+            log.error("AuthRoleController.delete.error:{}", e.getMessage());
             return Result.fail("删除角色失败");
         }
     }

@@ -56,7 +56,8 @@ public class SubjectController {
             subjectDomainService.add(subjectInfoBO);
             return Result.ok(true);
         } catch (Exception e) {
-            return Result.fail(e.getMessage());
+            log.error("SubjectController.add.error:{}", e.getMessage());
+            return Result.fail("添加题目失败");
         }
     }
 
@@ -71,7 +72,8 @@ public class SubjectController {
 
             return Result.ok(pageResult);
         } catch (Exception e) {
-            return Result.fail(e.getMessage());
+            log.error("SubjectController.getSubjectPage.error:{}", e.getMessage());
+            return Result.fail("查询题目列表失败");
         }
     }
 
@@ -87,8 +89,8 @@ public class SubjectController {
             subjectInfoDTO = SubjectInfoDTOConverter.INSTANCE.convert(subjectInfoBO);
             return Result.ok(subjectInfoDTO);
         } catch (Exception e) {
-            log.error(e.getMessage());
-            return Result.fail(e.getMessage());
+            log.error("SubjectController.querySubjectInfo.error:{}", e.getMessage());
+            return Result.fail("查询题目信息失败");
         }
     }
 }

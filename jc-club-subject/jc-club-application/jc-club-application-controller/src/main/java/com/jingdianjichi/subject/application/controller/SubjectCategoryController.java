@@ -42,7 +42,8 @@ public class SubjectCategoryController {
             subjectCategoryDomainService.add(subjectCategoryBO);
             return Result.ok(true);
         } catch (Exception e) {
-            return Result.fail(e.getMessage());
+            log.error("SubjectCategoryController.add.error:{}", e.getMessage());
+            return Result.fail("添加分类失败");
         }
     }
 
@@ -57,7 +58,8 @@ public class SubjectCategoryController {
             List<SubjectCategoryDTO> subjectCategoryDTOList = SubjectCategoryDTOConverter.INSTANCE.convert(subjectCategoryBOList);
             return Result.ok(subjectCategoryDTOList);
         } catch (Exception e) {
-            return Result.fail("查询失败");
+            log.error("SubjectCategoryController.queryPrimaryCategory.error:{}", e.getMessage());
+            return Result.fail("查询主分类失败");
         }
     }
 
@@ -73,7 +75,8 @@ public class SubjectCategoryController {
             List<SubjectCategoryDTO> subjectCategoryDTOList = SubjectCategoryDTOConverter.INSTANCE.convert(subjectCategoryBOList);
             return Result.ok(subjectCategoryDTOList);
         } catch (Exception e) {
-            return Result.fail(e.getMessage());
+            log.error("SubjectCategoryController.queryCategoryByPrimary.error:{}", e.getMessage());
+            return Result.fail("根据主分类查询子分类失败");
         }
     }
 
@@ -87,6 +90,7 @@ public class SubjectCategoryController {
             Boolean result = subjectCategoryDomainService.update(subjectCategoryBO);
             return Result.ok(result);
         } catch (Exception e) {
+            log.error("SubjectCategoryController.update.error:{}", e.getMessage());
             return Result.fail("更新分类失败");
         }
     }
@@ -101,6 +105,7 @@ public class SubjectCategoryController {
             Boolean result = subjectCategoryDomainService.delete(subjectCategoryBO);
             return Result.ok(result);
         } catch (Exception e) {
+            log.error("SubjectCategoryController.delete.error:{}", e.getMessage());
             return Result.fail("删除分类失败");
         }
     }

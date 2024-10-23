@@ -44,7 +44,8 @@ public class AuthUserController {
             AuthUserBO authUserBO = AuthUserDTOConverter.INSTANCE.convert(authUserDTO);
             return Result.ok(authUserDomainService.register(authUserBO));
         } catch (Exception e) {
-            return Result.fail(e.getMessage());
+            log.error("AuthUserController.register.error:{}", e.getMessage());
+            return Result.fail("注册用户失败");
         }
     }
 
@@ -56,6 +57,7 @@ public class AuthUserController {
             AuthUserBO authUserBO = AuthUserDTOConverter.INSTANCE.convert(authUserDTO);
             return Result.ok(authUserDomainService.update(authUserBO));
         } catch (Exception e) {
+            log.error("AuthUserController.update.error:{}", e.getMessage());
             return Result.fail("更新用户失败");
         }
     }
@@ -69,7 +71,8 @@ public class AuthUserController {
             AuthUserBO authUserBO = AuthUserDTOConverter.INSTANCE.convert(authUserDTO);
             return Result.ok(authUserDomainService.changeStatus(authUserBO));
         } catch (Exception e) {
-            return Result.fail("更新用户失败");
+            log.error("AuthUserController.changeStatus.error:{}", e.getMessage());
+            return Result.fail("更新用户状态失败");
         }
     }
 
@@ -81,7 +84,8 @@ public class AuthUserController {
             AuthUserBO authUserBO = AuthUserDTOConverter.INSTANCE.convert(authUserDTO);
             return Result.ok(authUserDomainService.delete(authUserBO));
         } catch (Exception e) {
-            return Result.fail("更新用户失败");
+            log.error("AuthUserController.delete.error:{}", e.getMessage());
+            return Result.fail("删除用户失败");
         }
     }
 
@@ -92,7 +96,7 @@ public class AuthUserController {
 
             return Result.ok(authUserDomainService.doLogin(validCode));
         } catch (Exception e) {
-            log.error("UserController.doLogin.error:{}", e.getMessage());
+            log.error("AuthUserController.doLogin.error:{}", e.getMessage());
             return Result.fail("用户登录失败");
         }
     }
@@ -102,4 +106,37 @@ public class AuthUserController {
     public String isLogin() {
         return "当前会话是否登录：" + StpUtil.isLogin();
     }
+
+    @RequestMapping("getUserInfo")
+    public Result<AuthUserDTO > getUserInfo(@RequestBody AuthUserDTO authUserDTO) {
+        try {
+            Preconditions.checkArgument(!StringUtils.isBlank(authUserDTO.getUserName()), "用户名不能为空!");
+
+            AuthUserBO authUserBO = AuthUserDTOConverter.INSTANCE.convert(authUserDTO);
+            authUserBO = authUserDomainService.getUserInfo(authUserBO);
+            authUserDTO = AuthUserDTOConverter.INSTANCE.convert(authUserBO);
+            return Result.ok(authUserDTO);
+        } catch (Exception e) {
+            log.error("AuthUserController.getUserInfo.error:{}", e.getMessage());
+            return Result.fail("获取用户信息失败");
+        }
+    }
+
+    /**
+     * 用户退出
+     */
+    @RequestMapping("logOut")
+    public Result logOut(@RequestParam String userName) {
+        try {
+            Preconditions.checkArgument(StringUtils.isNotBlank(userName), "用户名不能为空");
+
+            StpUtil.logout(userName);
+
+            return Result.ok();
+        } catch (Exception e) {
+            log.error("AuthUserController.logOut.error:{}", e.getMessage());
+            return Result.fail("用户登出失败");
+        }
+    }
+
 }

@@ -69,4 +69,5 @@ public interface AuthUserMapper {
      */
     int deleteById(Long id);
 
+    List<AuthUser> queryByCondition(AuthUser authUser);
 }

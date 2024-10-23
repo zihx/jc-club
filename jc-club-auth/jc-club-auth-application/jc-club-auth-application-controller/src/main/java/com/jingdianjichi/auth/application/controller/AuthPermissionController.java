@@ -47,7 +47,8 @@ public class AuthPermissionController {
             AuthPermissionBO authPermissionBO = AuthPermissionDTOConverter.INSTANCE.convert(authPermissionDTO);
             return Result.ok(authPermissionDomainService.add(authPermissionBO));
         } catch (Exception e) {
-            return Result.fail(e.getMessage());
+            log.error("AuthPermissionController.add.error:{}", e.getMessage());
+            return Result.fail("权限添加失败");
         }
     }
 
@@ -59,7 +60,8 @@ public class AuthPermissionController {
             AuthPermissionBO authPermissionBO = AuthPermissionDTOConverter.INSTANCE.convert(authPermissionDTO);
             return Result.ok(authPermissionDomainService.update(authPermissionBO));
         } catch (Exception e) {
-            return Result.fail(e.getMessage());
+            log.error("AuthPermissionController.update.error:{}", e.getMessage());
+            return Result.fail("权限修改失败");
         }
     }
 
@@ -71,7 +73,8 @@ public class AuthPermissionController {
             AuthPermissionBO authPermissionBO = AuthPermissionDTOConverter.INSTANCE.convert(authPermissionDTO);
             return Result.ok(authPermissionDomainService.delete(authPermissionBO));
         } catch (Exception e) {
-            return Result.fail(e.getMessage());
+            log.error("AuthPermissionController.delete.error:{}", e.getMessage());
+            return Result.fail("权限删除失败");
         }
     }
 }

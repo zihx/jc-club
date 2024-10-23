@@ -2,6 +2,7 @@ package com.jingdianjichi.auth.domain.service;
 
 import cn.dev33.satoken.stp.SaTokenInfo;
 import com.jingdianjichi.auth.domain.bo.AuthUserBO;
+import com.jingdianjichi.auth.infra.basic.entity.AuthUser;
 import org.springframework.context.annotation.Bean;
 
 /**
@@ -24,4 +25,6 @@ public interface AuthUserDomainService {
     Boolean changeStatus(AuthUserBO authUserBO);
 
     SaTokenInfo doLogin(String validCode);
+
+    AuthUserBO getUserInfo(AuthUserBO authUserBO);
 }

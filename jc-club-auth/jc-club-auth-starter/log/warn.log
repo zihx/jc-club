@@ -1,0 +1,4 @@
+18:14:51.626  [main] WARN  com.alibaba.cloud.nacos.client.NacosPropertySourceBuilder - Ignore the empty nacos configuration and get it based on dataId[jc-club-auth] & group[DEFAULT_GROUP]
+18:14:51.634  [main] WARN  com.alibaba.cloud.nacos.client.NacosPropertySourceBuilder - Ignore the empty nacos configuration and get it based on dataId[jc-club-auth.yaml] & group[DEFAULT_GROUP]
+18:14:51.640  [main] WARN  com.alibaba.cloud.nacos.client.NacosPropertySourceBuilder - Ignore the empty nacos configuration and get it based on dataId[jc-club-auth-dev.yaml] & group[DEFAULT_GROUP]
+18:15:24.751  [com.alibaba.nacos.naming.push.receiver] WARN  com.alibaba.nacos.client.naming - out of date data received, old-t: 1729678514349, new-t: 1729678513884

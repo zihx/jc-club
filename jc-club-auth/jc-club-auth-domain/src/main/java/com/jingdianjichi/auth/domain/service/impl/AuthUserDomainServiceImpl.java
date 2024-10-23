@@ -16,6 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
@@ -60,6 +61,13 @@ public class AuthUserDomainServiceImpl implements AuthUserDomainService {
     @Transactional
     public Boolean register(AuthUserBO authUserBO) {
         AuthUser authUser = AuthUserBOConverter.INSTANCE.convert(authUserBO);
+
+        // 用户是否存在
+        long exit = authUserService.count(authUser);
+        if (exit > 0) {
+            return true;
+        }
+
         if (StringUtils.isNotBlank(authUser.getPassword())) {
             authUser.setPassword(SaSecureUtil.md5BySalt(authUser.getPassword(), SALT));
         }
@@ -132,5 +140,15 @@ public class AuthUserDomainServiceImpl implements AuthUserDomainService {
         authUserDomainService.register(authUserBO);
         StpUtil.login(openId);
         return StpUtil.getTokenInfo();
+    }
+
+    @Override
+    public AuthUserBO getUserInfo(AuthUserBO authUserBO) {
+        AuthUser authUser = AuthUserBOConverter.INSTANCE.convert(authUserBO);
+        List<AuthUser> authUserList = authUserService.queryByCondition(authUser);
+        if (CollectionUtils.isEmpty(authUserList)) {
+            return new AuthUserBO();
+        }
+        return AuthUserBOConverter.INSTANCE.convert(authUserList.get(0));
     }
 }

@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 
 import javax.annotation.Resource;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * 用户信息表(AuthUser)表服务实现类
@@ -61,5 +63,15 @@ public class AuthUserServiceImpl implements AuthUserService {
     @Override
     public boolean deleteById(Long id) {
         return this.authUserMapper.deleteById(id) > 0;
+    }
+
+    @Override
+    public List<AuthUser> queryByCondition(AuthUser authUser) {
+        return authUserMapper.queryByCondition(authUser);
+    }
+
+    @Override
+    public long count(AuthUser authUser) {
+        return authUserMapper.count(authUser);
     }
 }

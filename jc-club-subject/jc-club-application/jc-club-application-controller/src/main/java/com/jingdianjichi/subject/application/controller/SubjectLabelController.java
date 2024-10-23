@@ -48,7 +48,8 @@ public class SubjectLabelController {
             Boolean result = subjectLabelDomainService.add(subjectLabelBO);
             return Result.ok(result);
         } catch (Exception e) {
-            return Result.fail(e.getMessage());
+            log.error("SubjectLabelController.add.error:{}", e.getMessage());
+            return Result.fail("添加标签失败");
         }
     }
 
@@ -62,7 +63,8 @@ public class SubjectLabelController {
             Boolean result = subjectLabelDomainService.update(subjectLabelBO);
             return Result.ok(result);
         } catch (Exception e) {
-            return Result.fail("更新失败");
+            log.error("SubjectLabelController.update.error:{}", e.getMessage());
+            return Result.fail("更新标签失败");
         }
     }
 
@@ -76,7 +78,8 @@ public class SubjectLabelController {
             Boolean result = subjectLabelDomainService.delete(subjectLabelBO);
             return Result.ok(result);
         } catch (Exception e) {
-            return Result.fail("删除失败");
+            log.error("SubjectLabelController.delete.error:{}", e.getMessage());
+            return Result.fail("删除标签失败");
         }
     }
 
@@ -91,7 +94,8 @@ public class SubjectLabelController {
             List<SubjectLabelDTO> subjectLabelDTOList = SubjectLabelDTOConverter.INSTANCE.convert(subjectLabelBOList);
             return Result.ok(subjectLabelDTOList);
         } catch (Exception e) {
-            return Result.fail(e.getMessage());
+            log.error("SubjectLabelController.queryLabelByCategoryId.error:{}", e.getMessage());
+            return Result.fail("根据分类查询标签失败");
         }
     }
 }

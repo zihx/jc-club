@@ -21,6 +21,9 @@ spring:
           uri: lb://jc-club-subject
           predicates:
             - Path=/subject/**
+          filters:
+          # /a/b -> /b，即去除第n个路径
+            - StripPrefix=1
        # - id: practice
        #   uri: lb://jc-club-practice
        #   predicates:
