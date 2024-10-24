@@ -77,4 +77,9 @@ public class SubjectMappingServiceImpl implements SubjectMappingService {
     public void insertBatch(List<SubjectMapping> subjectMappingList) {
         subjectMappingMapper.insertBatch(subjectMappingList);
     }
+
+    @Override
+    public long querySubjectCount(SubjectMapping subjectMapping) {
+        return subjectMappingMapper.querySubjectCount(subjectMapping);
+    }
 }

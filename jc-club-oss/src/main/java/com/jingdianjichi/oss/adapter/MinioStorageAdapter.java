@@ -2,6 +2,10 @@ package com.jingdianjichi.oss.adapter;
 
 import com.jingdianjichi.oss.entity.FileInfo;
 import com.jingdianjichi.oss.util.MinioUtil;
+import lombok.SneakyThrows;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -23,43 +27,60 @@ public class MinioStorageAdapter implements StorageAdapter {
     @Resource
     private MinioUtil minioUtil;
 
+    @Value("${minio.url}")
+    private String url;
+
     @Override
-    public void createBucket(String bucketName) throws Exception {
-        minioUtil.createBucket(bucketName);
+    @SneakyThrows
+    public void createBucket(String bucket) {
+        minioUtil.createBucket(bucket);
     }
 
     @Override
-    public void deleteBucket(String bucketName) throws Exception {
-        minioUtil.deleteBucket(bucketName);
-    }
-
-    @Override
-    public void uploadFile(MultipartFile uploadFile, String bucketName, String objectName) throws Exception {
-        minioUtil.createBucket(bucketName);
+    @SneakyThrows
+    public void uploadFile(MultipartFile uploadFile, String bucket, String objectName) {
+        minioUtil.createBucket(bucket);
         if (objectName != null) {
-            minioUtil.uploadFile(uploadFile.getInputStream(), bucketName, objectName + "/" + uploadFile.getName());
+            minioUtil.uploadFile(uploadFile.getInputStream(), bucket, objectName + "/" + uploadFile.getOriginalFilename());
         } else {
-            minioUtil.uploadFile(uploadFile.getInputStream(), bucketName, uploadFile.getName());
+            minioUtil.uploadFile(uploadFile.getInputStream(), bucket, uploadFile.getOriginalFilename());
         }
     }
 
     @Override
-    public InputStream downloadFile(String bucketName, String objectName) throws Exception {
-        return minioUtil.downloadFile(bucketName, objectName);
+    @SneakyThrows
+    public List<String> getAllBucket() {
+        return minioUtil.getAllBucket();
     }
 
     @Override
-    public void deleteObject(String bucketName, String objectName) throws Exception {
-        minioUtil.deleteObject(bucketName, objectName);
+    @SneakyThrows
+    public List<FileInfo> getAllFile(String bucket) {
+        return minioUtil.getAllFile(bucket);
     }
 
     @Override
-    public List<String> getAllBuckets() throws Exception {
-        return minioUtil.getAllBuckets();
+    @SneakyThrows
+    public InputStream downLoad(String bucket, String objectName) {
+        return minioUtil.downLoad(bucket, objectName);
     }
 
     @Override
-    public List<FileInfo> getAllObjects(String bucketName) throws Exception {
-        return minioUtil.getAllObjects(bucketName);
+    @SneakyThrows
+    public void deleteBucket(String bucket) {
+        minioUtil.deleteBucket(bucket);
     }
+
+    @Override
+    @SneakyThrows
+    public void deleteObject(String bucket, String objectName) {
+        minioUtil.deleteObject(bucket, objectName);
+    }
+
+    @Override
+    @SneakyThrows
+    public String getUrl(String bucket, String objectName) {
+        return url + "/" + bucket + "/" + objectName;
+    }
+
 }

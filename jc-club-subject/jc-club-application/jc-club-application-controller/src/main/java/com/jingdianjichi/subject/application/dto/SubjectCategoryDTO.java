@@ -1,8 +1,10 @@
 package com.jingdianjichi.subject.application.dto;
 
+import com.jingdianjichi.subject.infra.basic.entity.SubjectLabel;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * 题目分类(SubjectCategory)实体类
@@ -33,5 +35,9 @@ public class SubjectCategoryDTO implements Serializable {
      * 父级id
      */
     private Long parentId;
+
+    private Long count;
+
+    private List<SubjectLabelDTO> subjectLabelDTOList;
 }
 

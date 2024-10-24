@@ -45,5 +45,5 @@ public interface SubjectCategoryService {
      */
     boolean deleteById(Long id);
 
-    List<SubjectCategory> queryCategory(SubjectCategory subjectCategory);
+    List<SubjectCategory> queryByCondition(SubjectCategory subjectCategory);
 }

@@ -22,5 +22,7 @@ public interface SubjectCategoryDTOConverter {
 
     SubjectCategoryBO convert(SubjectCategoryDTO subjectCategoryDTO);
 
+    SubjectCategoryDTO convert(SubjectCategoryBO subjectCategoryBO);
+
     List<SubjectCategoryDTO> convert(List<SubjectCategoryBO> subjectCategoryBOList);
 }

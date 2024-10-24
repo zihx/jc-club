@@ -21,43 +21,43 @@ import java.util.List;
  */
 public class AliStorageAdapter implements StorageAdapter {
 
-    @Resource
-    private MinioUtil minioUtil;
-
     @Override
-    public void createBucket(String bucketName) throws Exception {
+    public void createBucket(String bucket) {
 
     }
 
     @Override
-    public void deleteBucket(String bucketName) throws Exception {
+    public void uploadFile(MultipartFile uploadFile, String bucket, String objectName) {
 
     }
 
     @Override
-    public void uploadFile(MultipartFile uploadFile, String bucketName, String objectName) throws Exception {
-
+    public List<String> getAllBucket() {
+        return Collections.emptyList();
     }
 
     @Override
-    public InputStream downloadFile(String bucketName, String objectName) throws Exception {
+    public List<FileInfo> getAllFile(String bucket) {
+        return Collections.emptyList();
+    }
+
+    @Override
+    public InputStream downLoad(String bucket, String objectName) {
         return null;
     }
 
     @Override
-    public void deleteObject(String bucketName, String objectName) throws Exception {
+    public void deleteBucket(String bucket) {
 
     }
 
     @Override
-    public List<String> getAllBuckets() throws Exception {
-        List<String> allBuckets = minioUtil.getAllBuckets();
-        allBuckets.add("ali");
-        return allBuckets;
+    public void deleteObject(String bucket, String objectName) {
+
     }
 
     @Override
-    public List<FileInfo> getAllObjects(String bucketName) throws Exception {
-        return Collections.emptyList();
+    public String getUrl(String bucket, String objectName) {
+        return "";
     }
 }

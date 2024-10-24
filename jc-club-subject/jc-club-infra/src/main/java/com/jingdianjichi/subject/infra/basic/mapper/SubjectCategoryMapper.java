@@ -69,6 +69,6 @@ public interface SubjectCategoryMapper {
      */
     int deleteById(Long id);
 
-    List<SubjectCategory> queryCategory(SubjectCategory subjectCategory);
+    List<SubjectCategory> queryByCondition(SubjectCategory subjectCategory);
 }
 

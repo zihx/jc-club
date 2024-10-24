@@ -60,8 +60,8 @@
         </where>
     </select>
 
-    <select id="queryCategory" resultMap="SubjectCategoryMap">
-        select *
+    <select id="queryByCondition" resultMap="SubjectCategoryMap">
+        select id, category_name, category_type, image_url, parent_id, created_by, created_time, update_by, update_time, is_deleted
         from subject_category
         <where>
             <if test="id != null">

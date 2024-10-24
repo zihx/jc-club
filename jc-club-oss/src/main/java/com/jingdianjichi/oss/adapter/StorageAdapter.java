@@ -17,57 +17,40 @@ import java.util.List;
  */
 public interface StorageAdapter {
     /**
-     * 创建bucket
-     * @param bucketName
-     * @throws Exception
+     * 创建bucket桶
      */
-    void createBucket(String bucketName) throws Exception;
-
-    /**
-     * 删除bucket
-     * @param bucketName
-     * @throws Exception
-     */
-    void deleteBucket(String bucketName) throws Exception;
+    void createBucket(String bucket);
 
     /**
      * 上传文件
-     * @param uploadFile
-     * @param bucketName
-     * @param objectName
-     * @throws Exception
      */
-    void uploadFile(MultipartFile uploadFile, String bucketName, String objectName) throws Exception;
+    void uploadFile(MultipartFile uploadFile, String bucket, String objectName);
+
+    /**
+     * 列出所有桶
+     */
+    List<String> getAllBucket();
+
+    /**
+     * 列出当前桶及文件
+     */
+    List<FileInfo> getAllFile(String bucket);
 
     /**
      * 下载文件
-     * @param bucketName
-     * @param objectName
-     * @return InputStream
-     * @throws Exception
      */
-    InputStream downloadFile(String bucketName, String objectName) throws Exception;
+    InputStream downLoad(String bucket, String objectName);
 
     /**
-     * 删除object
-     * @param bucketName
-     * @param objectName
-     * @throws Exception
+     * 删除桶
      */
-    void deleteObject(String bucketName, String objectName) throws Exception;
+    void deleteBucket(String bucket);
 
     /**
-     * 获取所有bucket
-     * @return
-     * @throws Exception
+     * 删除文件
      */
-    List<String> getAllBuckets() throws Exception;
+    void deleteObject(String bucket, String objectName);
 
-    /**
-     * 获取bucket中的所有object
-     * @param bucketName
-     * @return
-     * @throws Exception
-     */
-    List<FileInfo> getAllObjects(String bucketName) throws Exception;
+    String getUrl(String bucket, String objectName);
+
 }

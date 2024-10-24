@@ -2,6 +2,7 @@ package com.jingdianjichi.oss.service;
 
 import com.jingdianjichi.oss.adapter.StorageAdapter;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -21,11 +22,27 @@ public class FileService {
     @Resource
     private StorageAdapter storageAdapter;
 
-    public List<String> getAllBuckets() throws Exception {
-        return storageAdapter.getAllBuckets();
+    /**
+     * 列出所有桶
+     */
+    public List<String> getAllBucket() {
+        return storageAdapter.getAllBucket();
     }
 
-    public void createBucket(String bucketName) throws Exception {
-        storageAdapter.createBucket(bucketName);
+    /**
+     * 获取文件路径
+     */
+    public String getUrl(String bucketName,String objectName) {
+        return storageAdapter.getUrl(bucketName,objectName);
     }
+
+    /**
+     * 上传文件
+     */
+    public String uploadFile(MultipartFile uploadFile, String bucket, String objectName){
+        storageAdapter.uploadFile(uploadFile,bucket,objectName);
+        objectName = objectName + "/" + uploadFile.getOriginalFilename();
+        return storageAdapter.getUrl(bucket, objectName);
+    }
+
 }

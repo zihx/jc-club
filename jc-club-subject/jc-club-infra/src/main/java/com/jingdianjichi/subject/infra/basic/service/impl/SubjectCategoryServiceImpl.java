@@ -69,8 +69,7 @@ public class SubjectCategoryServiceImpl implements SubjectCategoryService {
     }
 
     @Override
-    public List<SubjectCategory> queryCategory(SubjectCategory subjectCategory) {
-        List<SubjectCategory> subjectCategories = subjectCategoryMapper.queryCategory(subjectCategory);
-        return subjectCategories;
+    public List<SubjectCategory> queryByCondition(SubjectCategory subjectCategory) {
+        return subjectCategoryMapper.queryByCondition(subjectCategory);
     }
 }

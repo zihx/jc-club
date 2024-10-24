@@ -89,7 +89,7 @@ public class AuthUserController {
         }
     }
 
-    @RequestMapping("doLogin")
+    @GetMapping("doLogin")
     public Result<SaTokenInfo> doLogin(@RequestParam("validCode") String validCode) {
         try {
             Preconditions.checkArgument(!StringUtils.isBlank(validCode), "验证码不能为空!");
@@ -125,7 +125,7 @@ public class AuthUserController {
     /**
      * 用户退出
      */
-    @RequestMapping("logOut")
+    @GetMapping("logOut")
     public Result logOut(@RequestParam String userName) {
         try {
             Preconditions.checkArgument(StringUtils.isNotBlank(userName), "用户名不能为空");

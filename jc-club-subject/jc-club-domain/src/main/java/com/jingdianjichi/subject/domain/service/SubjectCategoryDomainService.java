@@ -17,9 +17,13 @@ public interface SubjectCategoryDomainService {
 
     void add(SubjectCategoryBO subjectCategoryBO);
 
-    List<SubjectCategoryBO> queryCategory(SubjectCategoryBO subjectCategoryBO);
+    List<SubjectCategoryBO> queryPrimaryCategory(SubjectCategoryBO subjectCategoryBO);
 
     Boolean update(SubjectCategoryBO subjectCategoryBO);
 
     Boolean delete(SubjectCategoryBO subjectCategoryBO);
+
+    List<SubjectCategoryBO> queryCategoryAndLabel(SubjectCategoryBO subjectCategoryBO);
+
+    List<SubjectCategoryBO> queryCategoryByPrimary(SubjectCategoryBO subjectCategoryBO);
 }

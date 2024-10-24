@@ -48,4 +48,6 @@ public interface SubjectMappingService {
     List<SubjectMapping> queryLabelId(SubjectMapping subjectMapping);
 
     void insertBatch(List<SubjectMapping> subjectMappingList);
+
+    long querySubjectCount(SubjectMapping subjectMapping);
 }

@@ -8,7 +8,7 @@ import javax.annotation.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-10-23T16:44:16+0800",
+    date = "2024-10-24T16:22:15+0800",
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 1.8.0_212 (Oracle Corporation)"
 )
 public class SubjectCategoryDTOConverterImpl implements SubjectCategoryDTOConverter {
@@ -26,25 +26,13 @@ public class SubjectCategoryDTOConverterImpl implements SubjectCategoryDTOConver
         subjectCategoryBO.setCategoryType( subjectCategoryDTO.getCategoryType() );
         subjectCategoryBO.setImageUrl( subjectCategoryDTO.getImageUrl() );
         subjectCategoryBO.setParentId( subjectCategoryDTO.getParentId() );
+        subjectCategoryBO.setCount( subjectCategoryDTO.getCount() );
 
         return subjectCategoryBO;
     }
 
     @Override
-    public List<SubjectCategoryDTO> convert(List<SubjectCategoryBO> subjectCategoryBOList) {
-        if ( subjectCategoryBOList == null ) {
-            return null;
-        }
-
-        List<SubjectCategoryDTO> list = new ArrayList<SubjectCategoryDTO>( subjectCategoryBOList.size() );
-        for ( SubjectCategoryBO subjectCategoryBO : subjectCategoryBOList ) {
-            list.add( subjectCategoryBOToSubjectCategoryDTO( subjectCategoryBO ) );
-        }
-
-        return list;
-    }
-
-    protected SubjectCategoryDTO subjectCategoryBOToSubjectCategoryDTO(SubjectCategoryBO subjectCategoryBO) {
+    public SubjectCategoryDTO convert(SubjectCategoryBO subjectCategoryBO) {
         if ( subjectCategoryBO == null ) {
             return null;
         }
@@ -56,7 +44,22 @@ public class SubjectCategoryDTOConverterImpl implements SubjectCategoryDTOConver
         subjectCategoryDTO.setCategoryType( subjectCategoryBO.getCategoryType() );
         subjectCategoryDTO.setImageUrl( subjectCategoryBO.getImageUrl() );
         subjectCategoryDTO.setParentId( subjectCategoryBO.getParentId() );
+        subjectCategoryDTO.setCount( subjectCategoryBO.getCount() );
 
         return subjectCategoryDTO;
+    }
+
+    @Override
+    public List<SubjectCategoryDTO> convert(List<SubjectCategoryBO> subjectCategoryBOList) {
+        if ( subjectCategoryBOList == null ) {
+            return null;
+        }
+
+        List<SubjectCategoryDTO> list = new ArrayList<SubjectCategoryDTO>( subjectCategoryBOList.size() );
+        for ( SubjectCategoryBO subjectCategoryBO : subjectCategoryBOList ) {
+            list.add( convert( subjectCategoryBO ) );
+        }
+
+        return list;
     }
 }

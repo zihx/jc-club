@@ -2,6 +2,7 @@ package com.jingdianjichi.oss.util;
 
 import com.jingdianjichi.oss.entity.FileInfo;
 import io.minio.*;
+import io.minio.http.Method;
 import io.minio.messages.Bucket;
 import io.minio.messages.Item;
 import org.springframework.stereotype.Component;
@@ -28,82 +29,41 @@ public class MinioUtil {
     private MinioClient minioClient;
 
     /**
-     * 创建bucket
-     * @param bucketName
-     * @throws Exception
+     * 创建bucket桶
      */
-    public void createBucket(String bucketName) throws Exception {
-        boolean exists = minioClient.bucketExists(BucketExistsArgs.builder().bucket(bucketName).build());
+    public void createBucket(String bucket) throws Exception {
+        boolean exists = minioClient.bucketExists(BucketExistsArgs.builder().bucket(bucket).build());
         if (!exists) {
-            minioClient.makeBucket(MakeBucketArgs.builder().bucket(bucketName).build());
+            minioClient.makeBucket(MakeBucketArgs.builder().bucket(bucket).build());
         }
     }
 
     /**
-     * 删除bucket
-     * @param bucketName
-     * @throws Exception
-     */
-    public void deleteBucket(String bucketName) throws Exception {
-        minioClient.removeBucket(RemoveBucketArgs.builder().bucket(bucketName).build());
-    }
-
-    /**
      * 上传文件
-     * @param inputStream
-     * @param bucketName
-     * @param objectName
-     * @throws Exception
      */
-    public void uploadFile(InputStream inputStream, String bucketName, String objectName) throws Exception {
-        minioClient.putObject(PutObjectArgs.builder().bucket(bucketName).object(objectName)
-                // -1 表示输入流的大小未知，而 Integer.MAX_VALUE 表示允许上传的最大长度
-                .stream(inputStream, -1, Integer.MAX_VALUE).build());
+    public void uploadFile(InputStream inputStream, String bucket, String objectName) throws Exception {
+        minioClient.putObject(PutObjectArgs.builder().bucket(bucket).object(objectName)
+                .stream(inputStream, -1, 5242889L).build());
     }
 
     /**
-     * 下载文件
-     * @param bucketName
-     * @param objectName
-     * @return InputStream
-     * @throws Exception
+     * 列出所有桶
      */
-    public InputStream downloadFile(String bucketName, String objectName) throws Exception {
-        return minioClient.getObject(GetObjectArgs.builder().bucket(bucketName).object(objectName).build());
-    }
-
-    /**
-     * 删除object
-     * @param bucketName
-     * @param objectName
-     * @throws Exception
-     */
-    public void deleteObject(String bucketName, String objectName) throws Exception {
-        minioClient.removeObject(RemoveObjectArgs.builder().bucket(bucketName).object(objectName).build());
-    }
-
-    /**
-     * 获取所有bucket
-     * @return
-     * @throws Exception
-     */
-    public List<String> getAllBuckets() throws Exception {
+    public List<String> getAllBucket() throws Exception {
         List<Bucket> buckets = minioClient.listBuckets();
         return buckets.stream().map(Bucket::name).collect(Collectors.toList());
     }
 
     /**
-     * 获取bucket中的所有object
-     * @param bucketName
-     * @return
-     * @throws Exception
+     * 列出当前桶及文件
      */
-    public List<FileInfo> getAllObjects(String bucketName) throws Exception {
-        Iterable<Result<Item>> results = minioClient.listObjects(ListObjectsArgs.builder().bucket(bucketName).build());
+    public List<FileInfo> getAllFile(String bucket) throws Exception {
+        Iterable<Result<Item>> results = minioClient.listObjects(
+                ListObjectsArgs.builder().bucket(bucket).build());
         List<FileInfo> fileInfoList = new ArrayList<>();
         for (Result<Item> result : results) {
-            Item item = result.get();
             FileInfo fileInfo = new FileInfo();
+            Item item = result.get();
             fileInfo.setFileName(item.objectName());
             fileInfo.setDirectoryFlag(item.isDir());
             fileInfo.setEtag(item.etag());
@@ -111,4 +71,42 @@ public class MinioUtil {
         }
         return fileInfoList;
     }
+
+    /**
+     * 下载文件
+     */
+    public InputStream downLoad(String bucket, String objectName) throws Exception {
+        return minioClient.getObject(
+                GetObjectArgs.builder().bucket(bucket).object(objectName).build()
+        );
+    }
+
+    /**
+     * 删除桶
+     */
+    public void deleteBucket(String bucket) throws Exception {
+        minioClient.removeBucket(
+                RemoveBucketArgs.builder().bucket(bucket).build()
+        );
+    }
+
+    /**
+     * 删除文件
+     */
+    public void deleteObject(String bucket, String objectName) throws Exception {
+        minioClient.removeObject(
+                RemoveObjectArgs.builder().bucket(bucket).object(objectName).build()
+        );
+    }
+
+    /**
+     * 获取文件url
+     */
+    public String getPreviewFileUrl(String bucketName, String objectName) throws Exception{
+        GetPresignedObjectUrlArgs args = GetPresignedObjectUrlArgs.builder()
+                .method(Method.GET)
+                .bucket(bucketName).object(objectName).build();
+        return minioClient.getPresignedObjectUrl(args);
+    }
+
 }
